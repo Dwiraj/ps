@@ -1,0 +1,38 @@
+/*
+ * Filename : mixins.scss
+ *
+ * Contains all the functions
+ */
+
+ @mixin responsive($media) {
+	@if $media == small {
+		@media only screen and (min-width: $screen-sm) {
+			@content;
+		}
+	}
+	@else if $media == tablet {
+		@media only screen and (min-width: $screen-md) {
+			@content;
+		}
+	}
+	@else if $media == desktop {
+		@media only screen and (min-width: $screen-lg) {
+			@content;
+		}
+	}
+}
+
+@mixin placeholder {
+	&::-webkit-input-placeholder {
+		@content
+	}
+	&:-moz-placeholder {
+		@content
+	}
+	&::-moz-placeholder {
+		@content
+	}
+	&:-ms-input-placeholder {
+		@content
+	}
+}

@@ -208,20 +208,20 @@
 			public function updateemployee($id = 0)
 			{
 				$parameters = array(
-														'salutation' 		 	=> $this -> input -> post('salutation'),
+														'salutation' 		=> $this -> input -> post('salutation'),
 														'father_name' 	 	=> $this -> input -> post('father_name'),
 														'mother_name' 	 	=> $this -> input -> post('mother_name'),
-														'salary' 				 	=> $this -> input -> post('salary'),
-														'position'			 	=> $this -> input -> post('position'),
-														'start_date' 		 	=> $this -> input -> post('start_date'),
+														'salary' 			=> $this -> input -> post('salary'),
+														'position'			=> $this -> input -> post('position'),
+														'start_date' 		=> $this -> input -> post('start_date'),
 														'current_status' 	=> $this -> input -> post('current_status'),
-														'address'				 	=> $this -> input -> post('address'),
-														'phone_no'			 	=> $this -> input -> post('phone_no'),
+														'address'			=> $this -> input -> post('address'),
+														'phone_no'			=> $this -> input -> post('phone_no'),
 														'alternate_no'	 	=> $this -> input -> post('alternate_no'),	
-														'pan_no'				 	=> $this -> input -> post('pan_no'),
-														'bank_account_no' => $this -> input -> post('bank_account_no'),
+														'pan_no'			=> $this -> input -> post('pan_no'),
+														'bank_account_no' 	=> $this -> input -> post('bank_account_no'),
 														'qualification'  	=> $this -> input -> post('qualification'),
-														'comment' 			 	=> $this -> input -> post('comment')
+														'comment' 			=> $this -> input -> post('comment')
 														);
 				// if id is not set then set tmp id
 				if($id != 0)

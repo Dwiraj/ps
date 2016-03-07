@@ -1,0 +1,13 @@
+/*
+ * Filename : public.scss
+ *
+ *
+ * Contains all the styles of main application
+ * via importing all the individual scss files
+ */
+
+@import "public/csettings";
+@import "public/mixins";
+@import "public/header";
+@import "public/body";
+@import "public/footer";

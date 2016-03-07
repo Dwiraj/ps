@@ -1,0 +1,47 @@
+/*
+ * Filename : csettings.scss
+ *
+ *
+ * Contains all the custom settings (variables) including
+ * default settings of foundation framework.
+ */
+
+/**
+ * @Bootstrap variables
+ *
+ * Overriding
+ */
+
+$screen-sm: 767px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+
+$container-sm: auto;
+$container-md: auto;
+$container-lg: 1170px;
+
+$grid-columns: 12;
+// $grid-float-breakpoint: $screen-sm;
+
+
+$images-path: '../images/';
+$fonts-path: '../fonts/';
+
+$white: #ffffff;
+$black: #000000;
+$gray: #dddddd;
+
+$color-type1: #299b56;
+
+
+$media-small: 'small';
+$media-tablet: 'tablet';
+$media-desktop: 'desktop';
+
+$body-bg: $white;
+$base-color: $color-type1;
+
+
+$body-font-family: sans-serif;
+$body-font-size: 14px;
+$body-color: $base-color;

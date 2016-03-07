@@ -8,7 +8,7 @@
 					<td></td>
 					<td colspan="2">
 						<div style="color:red;" id="error_massege"><?php if(isset($error_msg)) { echo $error_msg; } ?></div>
-					</td>
+			 		</td>
 				</tr>
 				<tr>
 					<td><label>Email</label></td>

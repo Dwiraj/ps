@@ -1,0 +1,24 @@
+/*
+ * Filename : public.scss
+ *
+ *
+ * Contains all the styles of main application
+ * via importing all the individual scss files
+ */
+/*
+ * Filename : csettings.scss
+ *
+ *
+ * Contains all the custom settings (variables) including
+ * default settings of foundation framework.
+ */
+/**
+ * @Bootstrap variables
+ *
+ * Overriding
+ */
+/*
+ * Filename : mixins.scss
+ *
+ * Contains all the functions
+ */

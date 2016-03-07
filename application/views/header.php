@@ -1,16 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<?php
-	foreach ($css as $key) 
-	{
-		echo '<link rel="stylesheet" type="text/css" href="'.base_url().'assets/css/'.$key.'.css">';
-		echo "\n\t\t";
-	}
-	?>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="<?php echo base_url();?>assets/image/shortcut.png" rel="shortcut icon">
+	<link href="<?php echo image_path('shortcut.png');?>" rel="shortcut icon">
+	<link href="<?php echo css_path('library.css');?>" rel='stylesheet' type='text/css' media="all">
+	<link href="<?php echo css_path('public.css');?>" rel='stylesheet' type='text/css' media="all">
 	<title><?php echo $title;  ?></title>
 </head>
 <body>

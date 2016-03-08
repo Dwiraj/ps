@@ -49,19 +49,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] 						= 'User';
-$route['404_override'] 									= '';
-$route['salary-register-list'] 					= '/salary_register';
-$route['create-new-salary-register'] 		= '/salary_register/createregisterlist';
-$route['add-new-salary-register'] 			= '/salary_register/add_salary_register';
-$route['add-new-user'] 									= '/admin/adduser';
-$route['admin-list'] 										= '/admin/viewadmin';
-$route['employee-list'] 								= '/employee';
-$route['update-salary-register'] 				= '/salary_register/registerlist';
-$route['edit-salary-register'] 					= '/salary_register/update_salary_register';
-$route['change-password'] 							= '/user/change_password';
+$route['default_controller'] 			= 'User';
+$route['404_override'] 					= '';
+$route['salary-register-list'] 			= '/salary_register';
+$route['create-new-salary-register'] 	= '/salary_register/createregisterlist';
+$route['add-new-salary-register'] 		= '/salary_register/add_salary_register';
+$route['add-new-user'] 					= '/admin/adduser';
+$route['admin-list'] 					= '/admin/viewadmin';
+$route['employee-list'] 				= '/employee';
+$route['update-salary-register'] 		= '/salary_register/registerlist';
+$route['edit-salary-register'] 			= '/salary_register/update_salary_register';
+$route['change-password'] 				= '/user/change_password';
 $route['view-employee-detail/(:num)'] 	= 'employee/view_employee_detail/$1';
-$route['employee-salary-record']		  	= '/report/employee_salary_record';
-$route['employee-salary-report']		  	= '/report/employee_salary_report';
-$route['employee-salary-report-view']		= '/report/employee_salary_report_view';
-$route['translate_uri_dashes'] 					= FALSE;
+$route['employee-salary-record']		= '/report/employee_salary_record';
+$route['employee-salary-report']		= '/report/employee_salary_report';
+$route['employee-salary-report-view']	= '/report/employee_salary_report_view';
+$route['translate_uri_dashes'] 			= FALSE;

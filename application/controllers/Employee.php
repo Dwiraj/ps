@@ -2,14 +2,14 @@
 
 	defined('BASEPATH') OR exit('No direct script access allowed');
 
-	 /**
+	   /**
 		* @Class Employee
 	 	*
 		* @package		CodeIgniter
 	 	* @subpackage	Controller
 	 	* @category		Controller
-	 	* @author			Dwiraj Chauhan
-	 	* @link				localhost
+	 	* @author		Dwiraj Chauhan
+	 	* @link			localhost
 		*/
 		class Employee extends MY_Controller 
 		{
@@ -22,29 +22,27 @@
 				}
 			}
 
-		 /**
-			* @function index
-	 		* @param 
-	 		* @return void
-	 		*
-	 		* this function show all user view file as default
-			*/
+			/**
+			 * @function index
+			 * @param
+			 * @return void
+			 *
+			 * this function show all user view file as default
+			 */
 			public function index()
 			{
-				$parameters['query'] 	= $this -> Employees -> get_data();
-				$parameters['css'] 		=  array('core','datepicker', 'bootstrap.min');
-				$parameters['js'] 		= array('jquery-2.1.4.min','search', 'jquery-ui', 'bootstrap.min');
-				$parameters['title'] 	= "View all employee";
+				$parameters['query'] = $this -> Employees -> get_data();
+				$parameters['title'] = "View all employee";
 				$this->load_view('employee/viewemployee', $parameters);
 			}
 
-		 /**
-			* @function addedit
-	 		* @param 
-	 		* @return void
-	 		*
-		 	* this function check and redirect add form or update form
-			*/
+			/**
+			 * @function addedit
+			 * @param
+			 * @return void
+			 *
+			 * this function check and redirect add form or update form
+			 */
 			public function addedit()
 			{
 				$id = $this -> input -> get('id');
@@ -59,34 +57,34 @@
 					$this -> addemployee();
 				}
 			}
-		
-		 /**
-			* @function addemployee
-	 		* @param 
-	 		* @return void
-	 		*
-		 	* this function show add employee detail form and insert into database
-			*/
+
+			/**
+			 * @function addemployee
+			 * @param
+			 * @return void
+			 *
+			 * this function show add employee detail form and insert into database
+			 */
 			public function addemployee()
 			{ 
 				$parameters = array(												
-														'employee_id' 	 	=> $this -> input -> post('uid'),
-														'salutation' 		 	=> $this -> input -> post('salutation'),
-														'father_name' 	 	=> $this -> input -> post('father_name'),
-														'mother_name' 	 	=> $this -> input -> post('mother_name'),
-														'salary' 				 	=> $this -> input -> post('salary'),
-														'position'			 	=> $this -> input -> post('position'),
-														'start_date' 		 	=> $this -> input -> post('start_date'),
-														'current_status' 	=> $this -> input -> post('current_status'),
-														'address'				 	=> $this -> input -> post('address'),
-														'phone_no'			 	=> $this -> input -> post('phone_no'),
-														'alternate_no'	 	=> $this -> input -> post('alternate_no'),	
-														'pan_no'				 	=> $this -> input -> post('pan_no'),
-														'bank_account_no' => $this -> input -> post('bank_account_no'),
-														'qualification'  	=> $this -> input -> post('qualification'),
-														'comment' 			 	=> $this -> input -> post('comment'),
-														'profile_picture' => "logo.ico",
-														);
+									'employee_id' 	 	=> $this -> input -> post('uid'),
+									'salutation' 		=> $this -> input -> post('salutation'),
+									'father_name' 	 	=> $this -> input -> post('father_name'),
+									'mother_name' 	 	=> $this -> input -> post('mother_name'),
+									'salary' 			=> $this -> input -> post('salary'),
+									'position'			=> $this -> input -> post('position'),
+									'start_date' 		=> $this -> input -> post('start_date'),
+									'current_status' 	=> $this -> input -> post('current_status'),
+									'address'			=> $this -> input -> post('address'),
+									'phone_no'			=> $this -> input -> post('phone_no'),
+									'alternate_no'	 	=> $this -> input -> post('alternate_no'),
+									'pan_no'			=> $this -> input -> post('pan_no'),
+									'bank_account_no' 	=> $this -> input -> post('bank_account_no'),
+									'qualification'  	=> $this -> input -> post('qualification'),
+									'comment' 			=> $this -> input -> post('comment'),
+									'profile_picture' 	=> "logo.ico",
+									);
 				$end_date = $this -> input -> post('end_date');
 				$dob = $this -> input -> post('dob');
 				// setting end date if user current status is resigned
@@ -132,25 +130,23 @@
 						redirect('employee');
 					}
 				}
-				$parameters['css'] =  array('core','datepicker', 'bootstrap.min');
-				$parameters['js'] = array('jquery-2.1.4.min','form_validation', 'jquery-ui', 'bootstrap.min');
 				$parameters['title'] = "Add employee detail";
 				$this->load_view('employee/addemployee', $parameters);
 			}
 
-		 /**
-			* @function getsearch
-	 		* @param 
-	 		* @return void
-	 		*
-		 	* this function is for get data from database and view as search result
-			*/
+			/**
+			 * @function getsearch
+			 * @param
+			 * @return void
+			 *
+			 * this function is for get data from database and view as search result
+			 */
 			public function getsearch()
 			{
 				$data = array (
-												'searchtype' => $this -> input -> post('searchtype'),
-												'searchkeyword' => $this -> input -> post('searchkeyword'),
-											);
+								'searchtype' 	=> $this -> input -> post('searchtype'),
+								'searchkeyword' => $this -> input -> post('searchkeyword'),
+								);
 				if($data['searchkeyword'] == '')
 				{
 					// if search keyword is empty than show all users
@@ -171,20 +167,20 @@
 				echo json_encode($parameters);
 			}
 
-		 /**
-			* @function getsearchsalary
-	 		* @param 
-	 		* @return void
-	 		*
-		 	* this function is for get data from database and view as search result by min-max salary
-			*/
+			/**
+			 * @function getsearchsalary
+			 * @param
+			 * @return void
+			 *
+			 * this function is for get data from database and view as search result by min-max salary
+			 */
 			public function getsearchsalary()
 			{
 				$data = array (
-												'searchtype' => $this -> input -> post('searchtype'),
-												'min' => $this -> input -> post('min'),
-												'max' => $this -> input -> post('max')
-											);
+								'searchtype' 	=> $this -> input -> post('searchtype'),
+								'min' 			=> $this -> input -> post('min'),
+								'max' 			=> $this -> input -> post('max')
+								);
 				if($data['searchtype'] == '')
 				{
 					// if search keyword is empty than show all users
@@ -198,31 +194,31 @@
 				echo json_encode($parameters);
 			}
 
-		 /**
-			* @function 	updateemployee
-		 	* @param int $id
-	 		* @return void
-	 		*
-		 	* this function update employee
-			*/
+			/**
+			 * @function updateemployee
+			 * @param int $id
+			 * @return void
+			 *
+			 * this function update employee
+			 */
 			public function updateemployee($id = 0)
 			{
 				$parameters = array(
-														'salutation' 		=> $this -> input -> post('salutation'),
-														'father_name' 	 	=> $this -> input -> post('father_name'),
-														'mother_name' 	 	=> $this -> input -> post('mother_name'),
-														'salary' 			=> $this -> input -> post('salary'),
-														'position'			=> $this -> input -> post('position'),
-														'start_date' 		=> $this -> input -> post('start_date'),
-														'current_status' 	=> $this -> input -> post('current_status'),
-														'address'			=> $this -> input -> post('address'),
-														'phone_no'			=> $this -> input -> post('phone_no'),
-														'alternate_no'	 	=> $this -> input -> post('alternate_no'),	
-														'pan_no'			=> $this -> input -> post('pan_no'),
-														'bank_account_no' 	=> $this -> input -> post('bank_account_no'),
-														'qualification'  	=> $this -> input -> post('qualification'),
-														'comment' 			=> $this -> input -> post('comment')
-														);
+									'salutation' 		=> $this -> input -> post('salutation'),
+									'father_name' 	 	=> $this -> input -> post('father_name'),
+									'mother_name' 	 	=> $this -> input -> post('mother_name'),
+									'salary' 			=> $this -> input -> post('salary'),
+									'position'			=> $this -> input -> post('position'),
+									'start_date' 		=> $this -> input -> post('start_date'),
+									'current_status' 	=> $this -> input -> post('current_status'),
+									'address'			=> $this -> input -> post('address'),
+									'phone_no'			=> $this -> input -> post('phone_no'),
+									'alternate_no'	 	=> $this -> input -> post('alternate_no'),
+									'pan_no'			=> $this -> input -> post('pan_no'),
+									'bank_account_no' 	=> $this -> input -> post('bank_account_no'),
+									'qualification'  	=> $this -> input -> post('qualification'),
+									'comment' 			=> $this -> input -> post('comment')
+									);
 				// if id is not set then set tmp id
 				if($id != 0)
 				{
@@ -277,25 +273,21 @@
 					}
 				}
 				$parameters['query'] = $this -> Employees -> update_user($tmp);
-				$parameters['css'] = array('core','datepicker', 'bootstrap.min');
-				$parameters['js'] = array('jquery-2.1.4.min','form_validation', 'jquery-ui', 'bootstrap.min');
 				$parameters['title'] = "Update employee";
 				$this->load_view('employee/updateemployee', $parameters);
 			}
 
-		 /**
-			* @function getsearchsalary
-	 		* @param 
-	 		* @return void
-	 		*
-		 	* this function is for get data from database and view as search result by min-max salary
-			*/
+			/**
+			 * @function getsearchsalary
+			 * @param $id string
+			 * @return void
+			 *
+			 * this function is for get data from database and view as search result by min-max salary
+			 */
 			public function view_employee_detail($id = "")
 			{
 				$parameters['query'] = $this -> Users -> update_user($id);
 				$parameters['query1'] = $this -> Employees -> update_user($id);
-				$parameters['css'] = array('bootstrap.min');
-				$parameters['js'] = array('jquery-2.1.4.min', 'bootstrap.min');
 				$parameters['title'] = "Update employee";
 				$this->load_view('employee/view_employee_detail', $parameters);
 			}

@@ -5,11 +5,11 @@
 		/**
 		* @Class Salary_register
 	 	*
-		* @package			CodeIgniter
-	 	* @subpackage		Controller
+		* @package		CodeIgniter
+	 	* @subpackage	Controller
 	 	* @category	  	Controller
-	 	* @author				Dwiraj Chauhan
-	 	* @link					localhost
+	 	* @author		Dwiraj Chauhan
+	 	* @link			localhost
 		*/
 		class Salary_register extends MY_Controller 
 		{
@@ -22,62 +22,56 @@
 				}
 			}
 
-		 /**
-			* @function index
-	 		* @param 
-	 		* @return void
-	 		*
-			* index is use for show list of all the salary register
-			*/
+			/**
+			 * @function index
+			 * @param
+			 * @return void
+			 *
+			 * index is use for show list of all the salary register
+			 */
 			public function index()
 			{
-				$parameters['css'] 		= array('core', 'bootstrap.min');
-				$parameters['js'] 		= array('jquery-2.1.4.min','register_list', 'bootstrap.min');
 				$parameters['title'] 	= "Salary Register list";
 				$parameters['query'] 	= $this -> Salary_registers -> get_register_list();
 				$this->load_view('salary_register/salary_register_list', $parameters);
 			}
 
-		 /**
-			* @function registerlist
-	 		* @param 
-	 		* @return void
-	 		*
-			* function is use for show list of all the salary register is already saved
-			*/
+			/**
+			 * @function registerlist
+			 * @param
+			 * @return void
+			 *
+			 * function is use for show list of all the salary register is already saved
+			 */
 			public function registerlist()
 			{
 				$parameters['month'] 	= $this -> input -> get('m');
 				$parameters['year']  	= $this -> input -> get('y');
-				$parameters['css'] 		= array('core', 'bootstrap.min');
-				$parameters['js'] 		= array('jquery-2.1.4.min','register_list', 'bootstrap.min');
 				$parameters['title'] 	= "Update salary Register";
 				$parameters['query']	= $this -> Salary_registers -> getlist($parameters);
 				$this->load_view('salary_register/editregister', $parameters);
 			}
 
-		 /**
-			* @function createregisterlist
-	 		* @param 
-	 		* @return void
-	 		*
-			* function is use for show create new salary register form
-			*/
+			/**
+			 * @function createregisterlist
+			 * @param
+			 * @return void
+			 *
+			 * function is use for show create new salary register form
+			 */
 			public function createregisterlist()
 			{
-				$parameters['css'] 		=  array('core', 'bootstrap.min');
-				$parameters['js'] 		= array('jquery-2.1.4.min','register_list', 'bootstrap.min');
 				$parameters['title'] 	= "create salary Register";
 				$this->load_view('salary_register/create_salary_register', $parameters);
 			}
 
-	 	 /**
-			* @function getlist
-	 		* @param 
-	 		* @return void
-	 		*
-			* function is use for show create new salary register form from Ajax
-			*/
+			/**
+			 * @function getlist
+			 * @param
+			 * @return void
+			 *
+			 * function is use for show create new salary register form from Ajax
+			 */
 			public function getlist()
 			{
 				$parameters['month'] 	=	$this -> input -> post('month');
@@ -136,17 +130,15 @@
 					$parameters['error'] = "Salary register for ".$mon.", ".$parameters['year']." is already created";
 				}
 				echo json_encode($parameters);
-				//print_r($parameters);
-				//$this -> load -> view('salary_register/register_table', $parameters);
 			}
 
-		 /**
-			* @function add_salary_register
-	 		* @param 
-	 		* @return void
-	 		*
-			* function is use for create new salary register
-			*/
+			/**
+			 * @function add_salary_register
+			 * @param
+			 * @return void
+			 *
+			 * function is use for create new salary register
+			 */
 			public function add_salary_register()
 			{
 				$index = $this -> input -> post('index');
@@ -159,19 +151,19 @@
 					{
 						$n++;
 						$parameters[$n] = array(
-																		'employee_id' 		=> $this -> input -> post('uid'.$i.''),
-																		'base_salary' 		=> $this -> input -> post('base_salary'.$i.''),
-																		'bonus'			 			=> $this -> input -> post('bonus'.$i.''),
-																		'pt'				 			=> $this -> input -> post('pt'.$i.''),
-																		'esi'				 			=> $this -> input -> post('esi'.$i.''),
-																		'tds'				 			=> $this -> input -> post('tds'.$i.''),
-																		'total'			 			=> $this -> input -> post('total'.$i.''),
-																		'working_days'		=> $this -> input -> post('working_days'.$i.''),
-																		'month'			 			=> $this -> input -> post('month'),
-																		'year'			 			=> $this -> input -> post('year'),
-																		'created_by'	 		=> $this -> session -> userdata['logged_in']['id'],
-																		'created_date' 		=> date('Y-m-d')
-														       );
+												'employee_id' 	=> $this -> input -> post('uid'.$i.''),
+												'base_salary' 	=> $this -> input -> post('base_salary'.$i.''),
+												'bonus'			=> $this -> input -> post('bonus'.$i.''),
+												'pt'			=> $this -> input -> post('pt'.$i.''),
+												'esi'			=> $this -> input -> post('esi'.$i.''),
+												'tds'			=> $this -> input -> post('tds'.$i.''),
+												'total'			=> $this -> input -> post('total'.$i.''),
+												'working_days'	=> $this -> input -> post('working_days'.$i.''),
+												'month'			=> $this -> input -> post('month'),
+												'year'			=> $this -> input -> post('year'),
+												'created_by'	=> $this -> session -> userdata['logged_in']['id'],
+												'created_date' 	=> date('Y-m-d')
+									   			);
 					}
 				}
 				$this -> Salary_registers -> add_salary_register($parameters, $n);
@@ -193,37 +185,33 @@
 				for($i=1; $i<=$index; $i++)
 				{
 					$parameters[$i] = array(
-																		'employee_id' 		=> $this -> input -> post('uid'.$i.''),
-																		'base_salary' 		=> $this -> input -> post('base_salary'.$i.''),
-																		'bonus'			 			=> $this -> input -> post('bonus'.$i.''),
-																		'pt'				 			=> $this -> input -> post('pt'.$i.''),
-																		'esi'				 			=> $this -> input -> post('esi'.$i.''),
-																		'tds'				 			=> $this -> input -> post('tds'.$i.''),
-																		'total'			 			=> $this -> input -> post('total'.$i.''),
-																		'working_days'		=> $this -> input -> post('working_days'.$i.''),
-																		'month'			 			=> $this -> input -> post('month'),
-																		'year'			 			=> $this -> input -> post('year'),
-																		'created_by'	 		=> $this -> input -> post('created_by'.$i.''),
-																		'created_date' 		=> $this -> input -> post('created_date'.$i.''),
-																		'last_updated_by' => $this -> session -> userdata['logged_in']['id'],
-																		'last_updated' 		=> date('Y-m-d')
-																	);
+											'employee_id' 		=> $this -> input -> post('uid'.$i.''),
+											'base_salary' 		=> $this -> input -> post('base_salary'.$i.''),
+											'bonus'			 	=> $this -> input -> post('bonus'.$i.''),
+											'pt'				=> $this -> input -> post('pt'.$i.''),
+											'esi'				=> $this -> input -> post('esi'.$i.''),
+											'tds'				=> $this -> input -> post('tds'.$i.''),
+											'total'			 	=> $this -> input -> post('total'.$i.''),
+											'working_days'		=> $this -> input -> post('working_days'.$i.''),
+											'month'			 	=> $this -> input -> post('month'),
+											'year'			 	=> $this -> input -> post('year'),
+											'created_by'	 	=> $this -> input -> post('created_by'.$i.''),
+											'created_date' 		=> $this -> input -> post('created_date'.$i.''),
+											'last_updated_by' 	=> $this -> session -> userdata['logged_in']['id'],
+											'last_updated' 		=> date('Y-m-d')
+										);
 				}
 				$result = $this -> Salary_registers -> update_salary_register($parameters, $index);
-				/*if($result)
-				{
-					$this->session->set_flashdata('msg', 'This is a success message.');
-				}*/
 				redirect('salary-register-list');
 			}
 
-		 /**
-			* @function delete_salary_register
-	 		* @param 
-	 		* @return void
-	 		*
-			* function is use for delete salary register in database
-			*/
+			/**
+			 * @function delete_salary_register
+			 * @param
+			 * @return void
+			 *
+			 * function is use for delete salary register in database
+			 */
 			public function delete_salary_register()
 			{
 				$month 	= $this -> input -> get('m'); 

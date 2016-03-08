@@ -41,7 +41,7 @@ function Login_validation()
 	var password = document.forms["myfrm"]["password"].value;
 
 
-	if(email.trim() == "" && password.trim() == "")
+	if(email.trim() === "" && password.trim() === "")
 	{
 		$("#error_massege").show();
 		$("#error_massege").html('Please fill appropriate details...!!!');
@@ -50,14 +50,14 @@ function Login_validation()
 	}
 	else
 	{
-		if(email.trim() == "")
+		if(email.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Email required...!!!');
 			document.forms["myfrm"]["email"].focus();
 			return false;	
 		}
-		if(password.trim() == "")
+		if(password.trim() === "")
 		{
 			$("#error_massege").show();	
 			$("#error_massege").html('Password required...!!!');
@@ -96,7 +96,7 @@ function adduser_validation()
 	var password 		= document.forms["myform"]["password"].value;
 	var cpassword 	= document.forms["myform"]["cpassword"].value;
 
-	if(fname.trim() == "" && lname.trim() == "" && email.trim() == "" && user_level.trim() == "" && password.trim() == "" && cpassword.trim() == "")
+	if(fname.trim() === "" && lname.trim() === "" && email.trim() === "" && user_level.trim() === "" && password.trim() === "" && cpassword.trim() === "")
 	{
 		$("#error_massege").show();
 		$("#error_massege").html('Please fill appropriate details...!!!');
@@ -105,21 +105,21 @@ function adduser_validation()
 	}
 	else
 	{
-		if(fname.trim() == "")
+		if(fname.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('First name is required...!!!');
 			document.forms["myform"]["first_name"].focus();
 			return false;	
 		}
-		if(lname.trim() == "")
+		if(lname.trim() === "")
 		{
 			$("#error_massege").show();	
 			$("#error_massege").html('Last name is required...!!!');
 			document.forms["myform"]["last_name"].focus();
 			return false;	
 		}
-		if(email.trim() == "")
+		if(email.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Email  is required...!!!');
@@ -136,21 +136,21 @@ function adduser_validation()
 				return false;	
 			}
 		}
-		if(user_level.trim() == "")
+		if(user_level.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('User type is required...!!!');
 			document.forms["myform"]["user_level"].focus();
 			return false;	
 		}
-		if(password.trim() == "")
+		if(password.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Password is required...!!!');
 			document.forms["myform"]["password"].focus();
 			return false;	
 		}
-		if(cpassword.trim() == "")
+		if(cpassword.trim() === "")
 		{
 			$("#error_massege").show();	
 			$("#error_massege").html('Confirm password is required...!!!');
@@ -184,13 +184,13 @@ function adduser_validation()
  */
 function updateuser()
 {
-	var reg 	   		= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	var fname				= document.forms["updatefrm"]["first_name"].value;
-	var lname				= document.forms["updatefrm"]["last_name"].value;
-	var email 			= document.forms["updatefrm"]["email"].value;
+	var reg 	   	= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var fname		= document.forms["updatefrm"]["first_name"].value;
+	var lname		= document.forms["updatefrm"]["last_name"].value;
+	var email 		= document.forms["updatefrm"]["email"].value;
 	var user_level	= document.forms["updatefrm"]["user_level"].value;
 
-	if(fname.trim() == "" && lname.trim() == "" && email.trim() == "" && user_level.trim() == "")
+	if(fname.trim() === "" && lname.trim() === "" && email.trim() === "" && user_level.trim() === "")
 	{
 		$("#error_massege").show();
 		$("#error_massege").html('Please fill appropriate details...!!!');
@@ -199,21 +199,21 @@ function updateuser()
 	}
 	else
 	{
-		if(fname.trim() == "")
+		if(fname.trim() === "")
 		{
 			$("#error_massege").show();	
 			$("#error_massege").html('First name is required...!!!');
 			document.forms["updatefrm"]["first_name"].focus();
 			return false;	
 		}
-		if(lname.trim() == "")
+		if(lname.trim() === "")
 		{
 			$("#error_massege").show();	
 			$("#error_massege").html('Last name is required...!!!');
 			document.forms["updatefrm"]["last_name"].focus();
 			return false;	
 		}
-		if(email.trim() == "")
+		if(email.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Email  is required...!!!');
@@ -230,7 +230,7 @@ function updateuser()
 				return false;	
 			}
 		}
-		if(user_level.trim() == "")
+		if(user_level.trim() === "")
 		{
 			$("#error_massege").show();	
 			$("#error_massege").html('User type is required...!!!');
@@ -256,7 +256,7 @@ function addemployee_validation()
 	var start_date = document.forms["addemployee"]["start_date"].value;
 	var current_status = document.forms["addemployee"]["current_status"].value;
 
-	if(salary.trim() == "" && position.trim() == "" && start_date.trim() == "" && current_status.trim() == "")
+	if(salary.trim() === "" && position.trim() === "" && start_date.trim() === "" && current_status.trim() === "")
 	{
 		$("#error_massege").show();
 		$("#error_massege").html('Please fill appropriate details...!!!');
@@ -265,7 +265,7 @@ function addemployee_validation()
 	}
 	else
 	{
-		if(salary.trim() == "" )
+		if(salary.trim() === "" )
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Please enter salary...!!!');
@@ -279,21 +279,21 @@ function addemployee_validation()
 			document.forms["addemployee"]["salary"].focus();
 			return false;	
 		}
-		if(position.trim() == "" )
+		if(position.trim() === "" )
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Please select position...!!!');
 			document.forms["addemployee"]["position"].focus();
 			return false;	
 		}
-		if(start_date.trim() == "" )
+		if(start_date.trim() === "" )
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Please select start date...!!!');
 			document.forms["addemployee"]["start_date"].focus();
 			return false;	
 		}
-		if(current_status.trim() == "")
+		if(current_status.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Please enter current job status...!!!');
@@ -303,7 +303,7 @@ function addemployee_validation()
 		else if(current_status == "Resigned")
 		{
 			var end_date = document.forms["addemployee"]["end_date"].value;
-			if(end_date.trim() == "")
+			if(end_date.trim() === "")
 			{
 				$("#error_massege").show();
 				$("#error_massege").html('Please select end date...!!!');
@@ -350,13 +350,13 @@ function addEndDate()
  */
 function updateemployee_validation()
 {
- 		var numreg = /^(\d{1,3},)*(\d{1,3})+(\.\d{2})?$/;
- 		var salary = document.forms["updateemployee"]["salary"].value;
- 		var position = document.forms["updateemployee"]["position"].value;
- 		var start_date = document.forms["updateemployee"]["start_date"].value;
- 		var current_status = document.forms["updateemployee"]["current_status"].value;
+ 		var numreg 			= /^(\d{1,3},)*(\d{1,3})+(\.\d{2})?$/;
+ 		var salary 			= document.forms["updateemployee"]["salary"].value;
+ 		var position 		= document.forms["updateemployee"]["position"].value;
+ 		var start_date 		= document.forms["updateemployee"]["start_date"].value;
+ 		var current_status 	= document.forms["updateemployee"]["current_status"].value;
 
- 		if(salary.trim() == "" && position.trim() == "" && start_date.trim() == "" && current_status.trim() == "")
+ 		if(salary.trim() === "" && position.trim() === "" && start_date.trim() === "" && current_status.trim() === "")
  		{
  			$("#error_massege").show();
  			$("#error_massege").html('Please fill appropriate details...!!!');
@@ -365,7 +365,7 @@ function updateemployee_validation()
  		}
  		else
  		{
- 			if(salary.trim() == "" )
+ 			if(salary.trim() === "" )
  			{
  				$("#error_massege").show();	
  				$("#error_massege").html('Please enter salary...!!!');
@@ -379,21 +379,21 @@ function updateemployee_validation()
  				document.forms["updateemployee"]["salary"].focus();
  				return false;	
  			}
- 			if(position.trim() == "" )
+ 			if(position.trim() === "" )
  			{
  				$("#error_massege").show();
  				$("#error_massege").html('Please select position...!!!');
  				document.forms["updateemployee"]["position"].focus();
  				return false;	
  			}
- 			if(start_date.trim() == "" )
+ 			if(start_date.trim() === "" )
  			{
  				$("#error_massege").show();
  				$("#error_massege").html('Please select start date...!!!');
  				document.forms["updateemployee"]["start_date"].focus();
  				return false;	
  			}
- 			if(current_status.trim() == "")
+ 			if(current_status.trim() === "")
  			{
  				$("#error_massege").show();	
  				$("#error_massege").html('Please enter current job status...!!!');
@@ -403,7 +403,7 @@ function updateemployee_validation()
  			if(current_status.trim() == "Resigned")
  			{
  				var end_date = document.forms["updateemployee"]["end_date"].value;
- 				if(end_date.trim() == "" || end_date.trim() == '0000-00-00')
+ 				if(end_date.trim() === "" || end_date.trim() == '0000-00-00')
  				{
  					$("#error_massege").show();	
  					$("#error_massege").html('Please select end date...!!!');
@@ -439,25 +439,25 @@ function updateemployee_validation()
 		var pan = $('#pan').val().trim();
 		var bank_acc = $('#bank_acc').val().trim();
 
-		if(address == "" && dob == "" && mobile == "" )
+		if(address === "" && dob === "" && mobile === "" )
 		{
 			alert("Please enter details...!!!");
 			$('#address').focus();
 			return false;
 		}
-		if(address == "")
+		if(address === "")
 		{
 			alert("Please enter address");
 			$('#address').focus();
 			return false;
 		}
-		if(dob == "")
+		if(dob === "")
 		{
 			alert("Please enter birth date");
 			$('#datepickerdob').focus();
 			return false;
 		}
-		if(mobile == "")
+		if(mobile === "")
 		{
 			alert("Please enter mobile number");
 			$('#mobile').focus();
@@ -486,19 +486,19 @@ function updateemployee_validation()
 		var newpsaaword = document.forms["change_password"]["newpassword"].value;
 		var cpsaaword = document.forms["change_password"]["cpassword"].value;
 
-		if(oldpsaaword.trim() == "")
+		if(oldpsaaword.trim() === "")
 		{
 			alert("Please enter old password..!!!");
 			$('#oldpassword').focus();
 			return false;
 		}
-		if(newpsaaword.trim() == "")
+		if(newpsaaword.trim() === "")
 		{
 			alert("Please enter new password..!!!");
 			$('#newpassword').focus();
 			return false;
 		}
-		if(cpsaaword.trim() == "")
+		if(cpsaaword.trim() === "")
 		{
 			alert("Please enter confirm password..!!!");
 			$('#cpassword').focus();

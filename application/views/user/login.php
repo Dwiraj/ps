@@ -1,36 +1,39 @@
-
-	<h2 align="center">User Login Form</h2>
-		<div class="table-responsive">
-		<table>
-			<form name="myfrm" action="<?php echo base_url();?>user/login" method="POST">
-				<tr><th colspan="3"></th></tr>
-				<tr>
-					<td></td>
-					<td colspan="2">
+<div class="login-wraper" xmlns="http://www.w3.org/1999/html">
+	<div class="form-data">
+		<h2 class="col-sm-offset-2 col-sm-12">User Login Form</h2>
+			<form class="form-horizontal" role="form" name="myfrm" action="<?php echo base_url();?>user/login" method="POST">
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-12">
 						<div style="color:red;" id="error_massege"><?php if(isset($error_msg)) { echo $error_msg; } ?></div>
-			 		</td>
-				</tr>
-				<tr>
-					<td><label>Email</label></td>
-					<td><input type="text" name="email" id="email" class="form-txt" value="<?php if(isset($email)) { echo $email; } ?>"  placeholder="User Email"></td>
-					<td><?php echo form_error('email', '<div class="error">', '</div>'); ?>
-					</td>
-				</tr>
-					
-				<tr>
-					<td><label>Password</label></td>
-					<td><input type="password" name="password" class="form-txt" placeholder="User Password"></td>
-					<td><?php echo form_error('password', '<div class="error">', '</div>'); ?></td>
-				</tr>
-				<tr>
-					<td></td><td colspan="2"><input type="checkbox" name="rememberme" value="remember" >&nbsp;&nbsp; Remember Me</td>
-				</tr>
-				<tr>
-					<td colspan="3" align="right">
-						<input type="submit" name="submit" value="Login" id="login" onclick="return Login_validation();" class="button-btn">
-						<input type="reset" name="reset" value="Reset" class="button-btn">
-					</td>
-				</tr>
+			 		</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+						<input type="text" class="form-control" name="email" id="email" class="form-txt" value="<?php if(isset($email)) { echo $email; } ?>"  placeholder="User Email">
+						<span class="glyphicon glyphicon-user user"></span>
+					</div>
+				</div>
+				<?php echo form_error('email', '<div class="form-group"><div class="col-sm-offset-2 col-sm-12">', '</div></div>'); ?>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+						<input type="password" class="form-control" name="password" class="form-txt" placeholder="User Password">
+						<span class="glyphicon glyphicon-lock pass"></span>
+					</div>
+				</div>
+				<?php echo form_error('password', '<div class="form-group"><div class="col-sm-offset-2 col-sm-12">', '</div></div>'); ?>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+						<div class="checkbox">
+							<label><input type="checkbox" name="rememberme" value="remember" > Remember me</label>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-8">
+						<input type="submit" name="submit" value="Login" id="login" onclick="return Login_validation();" class="btn btn-info col-sm-12">
+					</div>
+				</div>
 			</form>
-		</table>	
 		</div>
+	</div>
+</div>

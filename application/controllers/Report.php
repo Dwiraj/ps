@@ -68,6 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$html = $this->load->view('salary_register_report', $parameters, true);
 
 			$this->load->library('pdf');
+			$this->pdf->setPageSize('A4-l');
 			$pdf = $this->pdf->load();
 			$pdf->SetHeader($this -> pdf_head());
 			$pdf->SetFooter($this -> pdf_foot()); // Add a footer for good measure
@@ -147,6 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$html = $this -> load -> view('report/employee_salary_record_slip', $parameters, true);
 
 			$this->load->library('pdf');
+			$this->pdf->setPageSize('A4');
 			$pdf = $this->pdf->load();
 			$pdf->SetHeader($this -> pdf_head());
 			$pdf->SetFooter($this -> pdf_foot());   // Add a footer for good measure
@@ -179,11 +181,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$html = $this -> load -> view('report/employee_tds_report', $parameters, true);
 
 			$this->load->library('pdf');
+			$this->pdf->setPageSize('A4');
 			$pdf = $this->pdf->load();
 			$pdf->SetHeader($this -> pdf_head());
 			$pdf->SetFooter($this -> pdf_foot());   // Add a footer for good measure
 			$pdf->WriteHTML($html); // write the HTML into the PDF
-			$pdf->Output($pdfFilePath, 'I'); // I - open a PDF file in browser // F - to save file // D - to download file
+			$pdf->Output($pdfFilePath, 'D'); // I - open a PDF file in browser // F - to save file // D - to download file
 
 		}
 	}

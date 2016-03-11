@@ -129,7 +129,7 @@
 			 */
 			public function pdf_head()
 			{
-				$pdf_head = '<p align="center"><img src='.base_url('assets/image/logo.png').'></p>';
+				$pdf_head = '<p align="center"><img src='.image_path('logo.png').'></p>';
  				return $pdf_head;
 			}
 

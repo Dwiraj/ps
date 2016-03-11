@@ -32,6 +32,11 @@
       &::-webkit-input-placeholder {
         color: $white;
       }
+      &:-webkit-autofill, &:-webkit-autofill:focus, &:-webkit-autofill:active, &:-webkit-autofill:hover  {
+        -webkit-box-shadow: 0 0 0 50px #333 inset !important; /* Change the color to your own background color */
+        -webkit-text-fill-color: #ffffff;
+      }
+
     }
     input[type='submit'] {
       margin-bottom: 30px;

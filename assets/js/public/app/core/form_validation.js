@@ -1,7 +1,6 @@
 /**
 * List of function in this file:
 -------------------------------------------
-*		1. Login_validation()
 *		2. adduser_validation()
 *		3. updateuser()
 *		4. addemployee_validation()
@@ -14,69 +13,14 @@
 
 
 
-	$(function() 
-  {
- 		$("#datepickerstart").datepicker({ dateFormat: "yy-mm-dd", changeMonth: true,
-      changeYear: true }).val();
- 		$("#datepickerend").datepicker({ dateFormat: "yy-mm-dd", changeMonth: true,
-      changeYear: true }).val();
- 		$("#datepickerdob").datepicker({ dateFormat: "yy-mm-dd", changeMonth: true,
-      changeYear: true }).val();
+$(function() {
+	$("#datepickerstart").datepicker({ dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true }).val();
+	$("#datepickerend").datepicker({ dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true }).val();
+	$("#datepickerdob").datepicker({ dateFormat: "yy-mm-dd", changeMonth: true, changeYear: true }).val();
 });
 
 jQuery('.numbersOnly').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g,'');	});
 
-/**
- * @function return Login_validation()
- * @param
- * @return boolean
- *
- * this function is use for validation of form login form
- * 
- */
-function Login_validation()
-{
-	var reg 	   = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	var email 	 = document.forms["myfrm"]["email"].value;
-	var password = document.forms["myfrm"]["password"].value;
-
-
-	if(email.trim() === "" && password.trim() === "")
-	{
-		$("#error_massege").show();
-		$("#error_massege").html('Please fill appropriate details...!!!');
-		document.forms["myfrm"]["email"].focus();
-		return false;	
-	}
-	else
-	{
-		if(email.trim() === "")
-		{
-			$("#error_massege").show();
-			$("#error_massege").html('Email required...!!!');
-			document.forms["myfrm"]["email"].focus();
-			return false;	
-		}
-		if(password.trim() === "")
-		{
-			$("#error_massege").show();	
-			$("#error_massege").html('Password required...!!!');
-			document.forms["myfrm"]["email"].focus();
-			return false;	
-		}
-		if(email.match(reg)) 
-		{
-			return true;
-		}
-		else
-		{
-			$("#error_massege").show();
-			$("#error_massege").html('Email is not valid...!!!');
-			document.forms["myfrm"]["email"].focus();
-			return false;	
-		}
-	}
-}
 
 /*
  * @function return adduser_validation()
@@ -88,12 +32,12 @@ function Login_validation()
  */
 function adduser_validation()
 {
-	var reg 	   		= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-	var fname				= document.forms["myform"]["first_name"].value;
-	var lname				= document.forms["myform"]["last_name"].value;
-	var email 			= document.forms["myform"]["email"].value;
+	var reg 	   	= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+	var fname		= document.forms["myform"]["first_name"].value;
+	var lname		= document.forms["myform"]["last_name"].value;
+	var email 		= document.forms["myform"]["email"].value;
 	var user_level	= document.forms["myform"]["user_level"].value;
-	var password 		= document.forms["myform"]["password"].value;
+	var password 	= document.forms["myform"]["password"].value;
 	var cpassword 	= document.forms["myform"]["cpassword"].value;
 
 	if(fname.trim() === "" && lname.trim() === "" && email.trim() === "" && user_level.trim() === "" && password.trim() === "" && cpassword.trim() === "")

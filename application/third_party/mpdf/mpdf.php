@@ -811,7 +811,6 @@ var $innerblocktags;
 // **********************************
 
 function mPDF($mode='',$format='A4-L',$default_font_size=0,$default_font='',$mgl=15,$mgr=15,$mgt=33,$mgb=25,$mgh=10,$mgf=9, $orientation='P') {
-
 /*-- BACKGROUNDS --*/
 		if (!class_exists('grad', false)) { include(_MPDF_PATH.'classes/grad.php'); }
 		if (empty($this->grad)) { $this->grad = new grad($this); }

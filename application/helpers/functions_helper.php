@@ -8,7 +8,7 @@
  */
     function image_path($image)
     {
-        $path = base_url()."/assets/image/".$image;
+        $path = base_url()."/assets/images/".$image;
         return $path;
     }
 

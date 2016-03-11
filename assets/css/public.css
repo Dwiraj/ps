@@ -29,6 +29,9 @@ html, body {
   margin: 0;
   font-family: sans-serif; }
 
+.navbar {
+  font-size: 18px; }
+
 .login-wraper {
   background-image: url("../images/login-background.png");
   background-repeat: no-repeat;
@@ -60,6 +63,10 @@ html, body {
       box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
       .login-wraper .form-data input[type='text']::-webkit-input-placeholder, .login-wraper .form-data input[type='password']::-webkit-input-placeholder {
         color: #ffffff; }
+      .login-wraper .form-data input[type='text']:-webkit-autofill, .login-wraper .form-data input[type='text']:-webkit-autofill:focus, .login-wraper .form-data input[type='text']:-webkit-autofill:active, .login-wraper .form-data input[type='text']:-webkit-autofill:hover, .login-wraper .form-data input[type='password']:-webkit-autofill, .login-wraper .form-data input[type='password']:-webkit-autofill:focus, .login-wraper .form-data input[type='password']:-webkit-autofill:active, .login-wraper .form-data input[type='password']:-webkit-autofill:hover {
+        -webkit-box-shadow: 0 0 0 50px #333 inset !important;
+        /* Change the color to your own background color */
+        -webkit-text-fill-color: #ffffff; }
     .login-wraper .form-data input[type='submit'] {
       margin-bottom: 30px; }
     .login-wraper .form-data .user, .login-wraper .form-data .pass {

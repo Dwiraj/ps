@@ -5,7 +5,7 @@
       {
         ?>
         <div class="col-sm-3">
-         <img style="margin-top:30px; margin-left:50px;" src="<?php echo base_url('assets/image/'.$profile_picture.'');?>" class="img-rounded" alt="<?php echo $query -> first_name." ".$query -> last_name;?>" title="<?php echo $query -> first_name." ".$query -> last_name;?>" width="150" height="190">
+         <img style="margin-top:30px; margin-left:50px;" src="<?php echo image_path($profile_picture);?>" class="img-rounded" alt="<?php echo $query -> first_name." ".$query -> last_name;?>" title="<?php echo $query -> first_name." ".$query -> last_name;?>" width="150" height="190">
          <button style="margin-top:35px; margin-left:75px;" data-toggle="modal" data-target="#myModal">Change photo</button>
 
          <!-- Modal -->

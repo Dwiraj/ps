@@ -27269,10 +27269,10 @@ var TableTools;
 
         };
 
-// For the Flash binding to work, ZeroClipboard_TableTools must be on the global
-// object list
+        // For the Flash binding to work, ZeroClipboard_TableTools must be on the global
+        // object list
         window.ZeroClipboard_TableTools = ZeroClipboard_TableTools;
-//include TableTools.js
+        //include TableTools.js
         /* TableTools
          * 2009-2014 SpryMedia Ltd - datatables.net/license
          */
@@ -27310,7 +27310,6 @@ var TableTools;
                 var dtSettings = $.fn.dataTable.Api ?
                     new $.fn.dataTable.Api( oDT ).settings()[0] :
                     oDT.fnSettings();
-
 
                 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                  * Public class variables
@@ -46888,42 +46887,194 @@ $("#login-form").validate({
         },
         password: {
             required: true,
-            minlength: 5
+            minlength: 5,
+            maxlength: 12
         }
     },
     messages: {
         password: {
             required: "Please provide a password",
-            minlength: "Your password must be at least 5 characters long"
+            minlength: "Your password must be at least 5 characters long",
+            maxlength: 'Password not be graterthen 12 characters'
         },
         email: "Please enter a valid email address",
     },
     submitHandler: function(form) {
         form.submit();
     }
+});
+
+$('#adduser-form').validate ({
+    rules: {
+        first_name: {
+            required: true,
+            minlength: 3,
+            maxlength: 30
+        },
+        last_name: {
+            required: true,
+            minlength: 3,
+            maxlength: 30
+        },
+        email: {
+            required: true,
+            email: true
+        },
+        user_level: "required",
+        password: {
+            required:true,
+            minlength: 6,
+            maxlength: 24
+        },
+        cpassword: {
+            required: true,
+            equalTo: "#password"
+        }
+    },
+    messages: {
+        first_name: {
+            required: "please enter first name",
+            minlength: "first name must be at least 3 characters long",
+            maxlength: "first name is too long"
+        },
+        last_name: {
+            required: "please enter last name",
+            minlength: "last name must be at least 3 characters long",
+            maxlength: "last name is too long"
+        },
+        email: "Please enter a valid email address",
+    },
+    submitHandler: function(form1) {
+        form1.submit();
+    }
 });;/**
  * Created by Dwiraj on 07-Mar-16.
  */
-$(document).ready(function() {
-   /* $('#tblDataAdmin').DataTable( {
-        "processing": true,
-        "serverSide": true,
-        "ajax": {
-            "url": "admin/get_admin_list"
-        }
-    });*/
 
-    var table = $('#tblDataAdmin').DataTable({
-        "processing": true,
-        "serverSide": true,
+var save_method; //for save method string
+var table;
+$(document).ready(function() {
+    table = $('#tblDataAdmin').DataTable({
+
+        "processing": true, //Feature control the processing indicator.
+        "serverSide": true, //Feature control DataTables' server-side processing mode.
+
+        // Load data for the table's content from an Ajax source
         "ajax": {
-            "url": "admin/get_admin_list"
+            "url": "admin/ajax_list",
+            "type": "POST"
+        },
+
+        //Set column definition initialisation properties.
+        "columnDefs": [
+            {
+                "targets": [ -1 ], //last column
+                "orderable": false, //set not orderable
+            },
+        ],
+
+    });
+});
+
+function add_person()
+{
+    save_method = 'add';
+    $('#form')[0].reset(); // reset form on modals
+    $('#modal_form').modal('show'); // show bootstrap modal
+    $('.modal-title').text('Add user'); // Set Title to Bootstrap modal title
+}
+
+function edit_person(id)
+{
+    save_method = 'update';
+    $('#form')[0].reset(); // reset form on modals
+
+    //Ajax Load data from ajax
+    $.ajax({
+        url : "admin/ajax_edit//" + id,
+        type: "GET",
+        dataType: "JSON",
+        success: function(data)
+        {
+            $('[name="id"]').val(data.id);
+            $('[name="first_name"]').val(data.first_name);
+            $('[name="last_name"]').val(data.last_name);
+            $('[name="email"]').val(data.email);
+            $('[name="user_level"]').val(data.user_level);
+            $('[name="password"]').val();
+            $('[name="cpassword"]').val();
+
+            $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
+            $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error get data from ajax');
         }
     });
-    var tt = new $.fn.DataTable.TableTools( table );
+}
 
-    $( tt.fnContainer() ).insertBefore('div.dataTables_wrapper');
-});;/**
+function reload_table()
+{
+    table.ajax.reload(null,false); //reload datatable ajax
+}
+
+function save()
+{
+    var url;
+    if(save_method == 'add')
+    {
+        url = "admin/ajax_add";
+    }
+    else
+    {
+        url = "admin/ajax_update";
+    }
+
+    // ajax adding data to database
+    $.ajax({
+        url : url,
+        type: "POST",
+        data: $('#form').serialize(),
+        dataType: "JSON",
+        success: function(data)
+        {
+            //if success close modal and reload ajax table
+            $('#modal_form').modal('hide');
+            reload_table();
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            alert('Error adding / update data');
+        }
+    });
+}
+
+function delete_person(id)
+{
+    if(confirm('Are you sure delete this user?'))
+    {
+        // ajax delete data to database
+        $.ajax({
+            url : "admin/ajax_delete/"+id,
+            type: "POST",
+            dataType: "JSON",
+            success: function(data)
+            {
+                //if success reload ajax table
+                $('#modal_form').modal('hide');
+                reload_table();
+            },
+            error: function (jqXHR, textStatus, errorThrown)
+            {
+                alert('Error adding / update data');
+            }
+        });
+
+    }
+}
+;/**
 * List of function in this file:
 -------------------------------------------
 *		2. adduser_validation()

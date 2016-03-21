@@ -1,7 +1,7 @@
 <div class="container">
 	<?php
-	$attributes = array('name' => 'myform', 'id' => 'adduser-form', 'class' => 'form-horizontal');
-	echo form_open('admin/adduser', $attributes);
+		$attributes = array('name' => 'myform111', 'id' => 'adduser-form', 'class' => 'form-horizontal');
+		echo form_open('admin/adduser', $attributes);
 	?>
 	<h2 align="center">Add new user</h2>
 	<div class="form-group">
@@ -88,7 +88,7 @@
 	<div class="form-group">
 		<label class="control-label col-xs-4" for="password">Password</label>
 		<div class="col-xs-6">
-			<input type="password" name="password" class="form-control" value="" placeholder="Enter user password">
+			<input type="password" name="password" id="password" class="form-control" value="" placeholder="Enter user password">
 		</div>
 	</div>
 	<div class="form-group">
@@ -113,7 +113,5 @@
 			<button type="button" class="btn btn-default">Back</button>
 		</div>
 	</div>
-	<?php
-	echo form_close();
-	?>
+	<?php echo form_close(); ?>
 </div>

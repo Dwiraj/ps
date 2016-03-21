@@ -31,6 +31,10 @@ html, body {
 
 .navbar {
   font-size: 18px; }
+  .navbar.navbar-inverse {
+    background-image: url("../images/login-background.png");
+    background-repeat: no-repeat;
+    background-size: cover; }
 
 .login-wraper {
   background-image: url("../images/login-background.png");
@@ -52,6 +56,8 @@ html, body {
     box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6); }
     .login-wraper .form-data h2 {
       font-size: 24px; }
+    .login-wraper .form-data .error {
+      color: #FFE500; }
     .login-wraper .form-data input[type='text'], .login-wraper .form-data input[type='password'] {
       position: relative;
       background: transparent;
@@ -73,3 +79,29 @@ html, body {
       position: absolute;
       top: 10px;
       left: 25px; }
+
+label.error {
+  color: #d42020;
+  padding-top: 5px; }
+
+.btn-red {
+  background-color: #d42020; }
+
+.add-button {
+  padding-bottom: 10px;
+  float: right; }
+
+.DTTT {
+  float: right;
+  padding-bottom: 15px; }
+
+table {
+  padding-top: 10px; }
+  table thead tr th {
+    background-color: #595959;
+    color: #ffffff; }
+  table tbody tr td {
+    color: #a6a7aa; }
+
+ul.pagination {
+  margin: 0; }

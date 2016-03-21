@@ -1,19 +1,19 @@
 	<?php 
 
 	 /**
-		* @Class 				Users
-		* @package			CodeIgniter
-	 	* @subpackage		Model
-	 	* @category			
-	 	* @author				Dwiraj Chauhan
-	 	* @link					localhost
+		* @Class 		Users
+		* @package		CodeIgniter
+	 	* @subpackage	Model
+	 	* @category
+	 	* @author		Dwiraj Chauhan<dwiraj.k.chauhan25@gamil.com>
+	 	* @link			localhost
 		*/
 		class Users extends CI_Model
 		{
 		 /**
 			* @function authenticate()
-		* @param string $parameters
-		*	@return array
+			* @param string $parameters
+			* @return array
 			*
 			* this function is for login and check email and password
 			*/
@@ -40,9 +40,9 @@
 		 /**
 			* @function get_data()
 			* @param
-			*	@return array
+			* @return array
 			*
-			* this function is for show user list to admin only
+			* this function is for show user(Admin) list to admin only
 			*/
 			public function get_data()
 			{
@@ -56,9 +56,9 @@
 			}
 
 		 /**
-			*	@function update_user()
+			* @function update_user()
 			* @param int $id
-			*	@return array
+			* @return array
 			*
 			* this function is for get single user data from database to update form
 			*/
@@ -72,9 +72,9 @@
 			}
 
 		 /**
-			*	@function delete_user()
+			* @function delete_user()
 			* @param int $id
-			*	@return void
+			* @return void
 			*
 			* this function is to delete user from database
 			*/
@@ -88,9 +88,9 @@
 			}
 
 		 /**
-			*	@function adduser()
+			* @function adduser()
 			* @param array $parameters
-			*	@return void
+			* @return void
 			*
 			* this function is for insert new user to database
 			*/
@@ -100,36 +100,36 @@
 			} 
 
 		 /**
-			*	@function update()
+			* @function update()
 			* @param array $parameters
-			*	@return void
+			* @return void
 			*
 			* this function is for update single user in database
 			*/
-			public function update($parameters)
+			public function update_1($parameters)
 			{
 				$this	-> db -> where('id', $parameters['id']);
 				$this	-> db -> update('users', $parameters);
 			} 
 
 		 /**
-			*	@function last_login()
+			* @function last_login()
 			* @param int $id
-			*	@return void
+			* @return void
 			*
 			* this function is used to update last login of user
 			*/
 			public function last_login($id)
 			{
-				$this -> db -> set('last_login', date('Y-m-d H:i:s'));
-				$this	-> db -> where('id', $id);
-				$this	-> db -> update('users');
+				//$this -> db -> set('last_login', date('Y-m-d H:i:s'));
+				$this -> db -> where('id', $id);
+				$this -> db -> update('users', ['last_login' => date('Y-m-d H:i:s')]);
 			}
 
 		 /**
-			*	@function event()
+			* @function event()
 			* @param 
-			*	@return array
+			* @return array
 			*
 			* this method is use for show birthdate event
 			*/
@@ -155,9 +155,9 @@
 			}
 
 		 /**
-			*	@function month_event()
+			* @function month_event()
 			* @param 
-			*	@return array
+			* @return array
 			*
 			* this method is use for show birthdate event
 			*/
@@ -183,9 +183,9 @@
 			}
 
 		 /**
-			*	@function user_exist()
+			* @function user_exist()
 			* @param array $parameters
-			*	@return boolean
+			* @return boolean
 			*
 			* this function is used check user already exist or not
 			*/
@@ -209,9 +209,9 @@
 			}
 
 		 /**
-			*	@function add_user_exist()
+			* @function add_user_exist()
 			* @param array $parameters
-			*	@return boolean 
+			* @return boolean
 			*
 			* this function is used check user already exist or not
 			*/
@@ -234,9 +234,9 @@
 			}
 
 		 /**
-			*	@function change_password()
+			* @function change_password()
 			* @param string $password
-			*	@return void
+			* @return void
 			*
 			* this method is used to update password of user
 			*/
@@ -248,5 +248,86 @@
 				$this	-> db -> update('users');
 			}
 
+		/***********************************************************************/
+			var $table = 'users';
+			var $column = array('first_name','last_name','email','password','user_level', 'last_login', 'user_status');
+			var $order = array('id' => 'desc');
+
+			public function __construct()
+			{
+				parent::__construct();
+			}
+
+			private function _get_datatables_query()
+			{
+				$this->db->from($this->table);
+				$i = 0;
+				foreach ($this->column as $item)
+				{
+					if($_POST['search']['value'])
+						($i===0) ? $this->db->like($item, $_POST['search']['value']) : $this->db->or_like($item, $_POST['search']['value']);
+					$column[$i] = $item;
+					$i++;
+				}
+
+				if(isset($_POST['order']))
+				{
+					$this->db->order_by($column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
+				}
+				else if(isset($this->order))
+				{
+					$order = $this->order;
+					$this->db->order_by(key($order), $order[key($order)]);
+				}
+			}
+
+			function get_datatables()
+			{
+				$this->_get_datatables_query();
+				if($_POST['length'] != -1)
+					$this->db->limit($_POST['length'], $_POST['start']);
+				$query = $this->db->get();
+				return $query->result();
+			}
+
+			function count_filtered()
+			{
+				$this->_get_datatables_query();
+				$query = $this->db->get();
+				return $query->num_rows();
+			}
+
+			public function count_all()
+			{
+				$this->db->from($this->table);
+				return $this->db->count_all_results();
+			}
+
+			public function get_by_id($id)
+			{
+				$this->db->from($this->table);
+				$this->db->where('id',$id);
+				$query = $this->db->get();
+
+				return $query->row();
+			}
+
+			public function save($data)
+			{
+				$this->db->insert($this->table, $data);
+				return $this->db->insert_id();
+			}
+
+			public function update($where, $data)
+			{
+				$this->db->update($this->table, $data, $where);
+				return $this->db->affected_rows();
+			}
+
+			public function delete_by_id($id)
+			{
+				$this->db->where('id', $id);
+				$this->db->delete($this->table);
+			}
 		}
 	?>

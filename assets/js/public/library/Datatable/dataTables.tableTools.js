@@ -429,10 +429,10 @@ var TableTools;
 
         };
 
-// For the Flash binding to work, ZeroClipboard_TableTools must be on the global
-// object list
+        // For the Flash binding to work, ZeroClipboard_TableTools must be on the global
+        // object list
         window.ZeroClipboard_TableTools = ZeroClipboard_TableTools;
-//include TableTools.js
+        //include TableTools.js
         /* TableTools
          * 2009-2014 SpryMedia Ltd - datatables.net/license
          */
@@ -470,7 +470,6 @@ var TableTools;
                 var dtSettings = $.fn.dataTable.Api ?
                     new $.fn.dataTable.Api( oDT ).settings()[0] :
                     oDT.fnSettings();
-
 
                 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
                  * Public class variables

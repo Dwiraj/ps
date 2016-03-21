@@ -7,4 +7,9 @@ html, body {
 }
 .navbar {
   font-size: 18px;
+  &.navbar-inverse {
+    background-image: url($images-path + "login-background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }

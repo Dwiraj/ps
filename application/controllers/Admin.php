@@ -78,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					if($parameters['user_level'] == '1')
 					redirect('employee');
 					else
-					redirect('admin/manageuser');
+					redirect('admin-list');
 				}
 				else
 				{
@@ -143,8 +143,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					'db' => 'last_login',
 					'dt' => 5,
 					'formatter' => function( $d, $row ) {
-						$a = '<a href="admin/update/'. $row[0] .'"><button>Edit</button></a>
-							  <a href="admin/deleteuser/'.$row[0].'"><button>Delete</button></a>';
+						$a = '<a href="admin/update/'. $row[0] .'"><button class="btn btn-info">Edit</button></a>
+							  <a href="admin/deleteuser/'.$row[0].'"><button class="btn btn-danger btn-red">Delete</but		ton></a>';
 						return $a;
 					}
 				)
@@ -235,6 +235,80 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			$parameters['query'] = $this -> Users -> update_user($tmp);
 			$parameters['title'] = "update user";
 			$this -> load_view('admin/update', $parameters);
+		}
+
+		/**********************************************************************************/
+		public function ajax_list()
+		{
+			$list = $this->Users->get_datatables();
+			$data = array();
+			$no = $_POST['start'];
+			foreach ($list as $user) {
+				$no++;
+				$row = array();
+				$row[] = $user->id;
+				$row[] = $user->first_name;
+				$row[] = $user->last_name;
+				$row[] = $user->email;
+				$row[] = $user->last_login ? date('jS F Y, g:i a', strtotime($user->last_login)) : "Not Login yet";
+
+				//add html for action
+				$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_person('."'".$user->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                  <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$user->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+
+				$data[] = $row;
+			}
+
+			$output = array(
+				"draw" => $_POST['draw'],
+				"recordsTotal" => $this->Users->count_all(),
+				"recordsFiltered" => $this->Users->count_filtered(),
+				"data" => $data,
+			);
+			//output to json format
+			echo json_encode($output);
+		}
+
+		public function ajax_edit($id)
+		{
+			$data = $this->Users->get_by_id($id);
+			echo json_encode($data);
+		}
+
+		public function ajax_add()
+		{
+			$parameters = array(
+				'first_name'  	=> $this -> input -> post('first_name'),
+				'last_name' 	=> $this -> input -> post('last_name'),
+				'email' 		=> $this -> input -> post('email'),
+				'password' 		=> md5($this -> input -> post('password')),
+				'user_level' 	=> $this -> input -> post('user_level')
+			);
+			$insert = $this->Users->save($parameters);
+			echo json_encode(array("status" => TRUE));
+		}
+
+		public function ajax_update()
+		{
+
+			$parameters = array(
+				'first_name'  	=> $this -> input -> post('first_name'),
+				'last_name' 	=> $this -> input -> post('last_name'),
+				'email' 		=> $this -> input -> post('email'),
+				'user_level' 	=> $this -> input -> post('user_level')
+			);
+			if(!empty($this->input->post('password')) && $this->input->post('password') == $this->input->post('cpassword'))
+			{
+				$parameters['password'] = md5($this -> input -> post('password'));
+			}
+			$this->Users->update(array('id' => $this->input->post('id')), $parameters);
+			echo json_encode(array("status" => TRUE));
+		}
+
+		public function ajax_delete($id)
+		{
+			$this->Users->delete_by_id($id);
+			echo json_encode(array("status" => TRUE));
 		}
 
 	}

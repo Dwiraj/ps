@@ -25,42 +25,36 @@
 				<div class="collapse navbar-collapse" id="myNavbar">
 					<ul class="nav navbar-nav">
 						<?php 
-						if($user_level == 1)
-						{
-							?>
-							<li><a href="<?php echo base_url();?>user">Home</a></li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-							<?php				
-						} 
-						else 
-						{
-							?>	
-							<li><a href="<?php echo base_url();?>user">Home</a></li>
-							<li class="dropdown" style="cursor:pointer"><a class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="<?php echo base_url();?>admin-list">View admin</a></li>
-									<li><a href="<?php echo base_url();?>add-new-user">Add admin</a></li>
-								</ul>
-							</li>
-							<li class="dropdown" style="cursor:pointer"><a class="dropdown-toggle" data-toggle="dropdown">Employee <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="<?php echo base_url();?>employee-list">View employee</a></li>
-									<li><a href="<?php echo base_url();?>add-new-user">Add employee</a></li>
-								</ul>
-							</li>
-							<li><a href="<?php echo base_url();?>salary-register-list">Salary register</a></li>
-							<li class="dropdown" style="cursor:pointer"><a class="dropdown-toggle" data-toggle="dropdown">Reports <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="<?php echo base_url();?>employee-salary-record">Employee salary record</a></li>
-									<li><a href="<?php echo base_url();?>user/development">Employee leave record</a></li>
-									<li><a href="<?php echo base_url();?>user/development">Employee detail</a></li>
-								</ul>
-							</li>
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
+							if($user_level == 1)
+							{
+						?>
+						<li><a href="<?php echo base_url();?>user">Home</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<?php
+							}
+							else
+							{
+						?>
+						<li><a href="<?php echo base_url();?>user">Home</a></li>
+						<li class="dropdown" style="cursor:pointer"><a href="<?php echo base_url();?>admin-list" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo base_url();?>add-new-user">Add admin</a></li>
+							</ul>
+						</li>
+						<li><a href="<?php echo base_url();?>employee-list">Employee</a></li>
+						<li><a href="<?php echo base_url();?>salary-register-list">Salary register</a></li>
+						<li class="dropdown" style="cursor:pointer"><a class="dropdown-toggle" data-toggle="dropdown">Reports <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="<?php echo base_url();?>employee-salary-record">Employee salary record</a></li>
+								<li><a href="<?php echo base_url();?>user/development">Employee leave record</a></li>
+								<li><a href="<?php echo base_url();?>user/development">Employee detail</a></li>
+							</ul>
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
 						<?php 
-						} 
+							}
 						?>
 						<li><a><?php echo  $footer;	?></a></li>
 						<li class="dropdown" style="cursor:pointer"><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-log-out"></span> <?php echo  $user; ?></a>
@@ -75,5 +69,5 @@
 			</div>
 		</nav>
 		<?php
-	}
+		}
 	?>

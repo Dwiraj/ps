@@ -1,0 +1,40 @@
+label.error {
+  color: $red;
+  padding-top: 5px;
+}
+
+.btn-red {
+  background-color: $red;
+}
+.add-button {
+  padding-bottom: 10px;
+  float: right;
+}
+
+.DTTT {
+  float: right;
+  padding-bottom: 15px;
+}
+
+table {
+  padding-top: 10px;
+  thead {
+    tr {
+      th {
+        background-color: $table-head-background;
+        color: $white;
+      }
+    }
+  }
+  tbody {
+    tr {
+      td {
+        color: $table-font-color;
+      }
+    }
+  }
+}
+
+ul.pagination {
+  margin: 0;
+}

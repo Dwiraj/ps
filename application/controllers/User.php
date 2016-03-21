@@ -86,7 +86,7 @@
 						$sess_array = array(
 											'id' 		=> $row -> id,
 											'first_name'=> $row -> first_name,
-											'user_level'=>	$row -> user_level,
+											'user_level'=> $row -> user_level,
 											'last_login'=> $last_login
 											);
 						
@@ -109,7 +109,7 @@
 	
 						// update last login of user
 						$this -> Users -> last_login($row -> id);
-						redirect('user/welcome');	
+						redirect('user/welcome');
 					}
 					else
 					{
@@ -285,9 +285,9 @@
 									'newpassword'	=> md5($this -> input -> post('newpassword')),
 									'cpassword'		=> md5($this -> input -> post('cpassword'))
 									);
-				$this ->	form_validation -> set_rules('oldpassword', 'old password', 'trim|required');
-				$this ->	form_validation -> set_rules('newpassword', 'new password', 'trim|required|matches[cpassword]');
-				$this ->	form_validation -> set_rules('cpassword', 'confirm password', 'trim|required');
+				$this -> form_validation -> set_rules('oldpassword', 'old password', 'trim|required');
+				$this -> form_validation -> set_rules('newpassword', 'new password', 'trim|required|matches[cpassword]');
+				$this -> form_validation -> set_rules('cpassword', 'confirm password', 'trim|required');
 
 				if ($this->form_validation->run() == true) 
 				{
@@ -320,7 +320,7 @@
 				$id 					= $this -> session -> userdata['logged_in']['id'];
 				$config['upload_path'] 	= './assets/image/';
 				chmod($config['upload_path'], 777);
-				$config['allowed_types'] = 'gif|jpg|png';
+				$config['allowed_types']= 'gif|jpg|png';
 				$config['file_name'] 	= $id;
 				$config['overwrite'] 	= TRUE;
 				$config['max_size']		= '100';
@@ -338,7 +338,7 @@
 				{
 					$data = array('upload_data' => $this -> upload -> data());
 					$this -> Employees -> add_image($data['upload_data'], $id);
-					redirect('user/profile');	
+					redirect('user/profile');
 					/*echo "<script type='text/javascript'>
 								alert('Your profile picture set successfully...!!!');
 					 			window.location.href='".base_url('user/profile')."';
@@ -373,5 +373,5 @@
 				redirect('user/login');
 			}
 			
-		}
-	?>
+	}
+?>

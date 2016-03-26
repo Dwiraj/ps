@@ -18,7 +18,7 @@
 				<th>First name</th>
 				<th>Last Name</th>
 				<th>Email</th>
-				<th>User Type</th>
+				<th>Last login</th>
 				<th>Action</th>
 			</tr>
 		</thead>
@@ -74,9 +74,7 @@
 											}
 											else
 											{
-												?>
-												<option value="" >-- Select one --</option>
-												<?php
+												echo "<option value='' >-- Select one --</option>";
 											}
 											?>
 											<option <?php echo $select_e; ?> value="1">Employee</option>

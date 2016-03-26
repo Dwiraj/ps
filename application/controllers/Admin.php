@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	* @package 		CodeIgniter
  	* @subpackage	Controller
  	* @category		Controller
- 	* @author		Dwiraj Chauhan
+ 	* @author		Dwiraj Chauhan <dwiraj.k.chauhan25@gmail.com>
  	* @link			localhost
 	*/
  	class Admin extends MY_Controller 
@@ -76,9 +76,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					// add user detail to database
 					$this -> Users -> adduser($parameters);
 					if($parameters['user_level'] == '1')
-					redirect('employee');
+						redirect('employee');
 					else
-					redirect('admin-list');
+						redirect('admin-list');
 				}
 				else
 				{

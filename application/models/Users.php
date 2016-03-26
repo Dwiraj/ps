@@ -5,7 +5,7 @@
 		* @package		CodeIgniter
 	 	* @subpackage	Model
 	 	* @category
-	 	* @author		Dwiraj Chauhan<dwiraj.k.chauhan25@gamil.com>
+	 	* @author		Dwiraj Chauhan <dwiraj.k.chauhan25@gamil.com>
 	 	* @link			localhost
 		*/
 		class Users extends CI_Model

@@ -37,11 +37,12 @@
 							{
 						?>
 						<li><a href="<?php echo base_url();?>user">Home</a></li>
-						<li class="dropdown" style="cursor:pointer"><a href="<?php echo base_url();?>admin-list" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
+						<li><a href="<?php echo base_url(); ?>admin-list" >Admin</a></li>
+						<!--<li class="dropdown" style="cursor:pointer"><a href="<?php /*echo base_url();*/?>admin-list" class="dropdown-toggle" data-toggle="dropdown">Admin <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php echo base_url();?>add-new-user">Add admin</a></li>
+								<li><a href="<?php /*echo base_url();*/?>add-new-user">Add admin</a></li>
 							</ul>
-						</li>
+						</li>-->
 						<li><a href="<?php echo base_url();?>employee-list">Employee</a></li>
 						<li><a href="<?php echo base_url();?>salary-register-list">Salary register</a></li>
 						<li class="dropdown" style="cursor:pointer"><a class="dropdown-toggle" data-toggle="dropdown">Reports <span class="caret"></span></a>

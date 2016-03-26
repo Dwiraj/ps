@@ -8,7 +8,7 @@
 		* @package		CodeIgniter
 	 	* @subpackage	Controller 
 	 	* @category		
-	 	* @author		Dwiraj Chauhan
+	 	* @author		Dwiraj Chauhan <dwiraj.k.chauhan25@gmail.com>
 	 	* @link			localhost
 		*/
 	class User extends MY_Controller 

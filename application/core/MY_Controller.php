@@ -86,27 +86,27 @@
 				$this->form_validation->set_error_delimiters('<div class="error">','</div>');
 				if($page == 'login')
 				{
-					$this ->	form_validation -> set_rules('email','email', 'trim|required|valid_email');
-					$this ->	form_validation -> set_rules('password', 'password', 'trim|required');
+					$this -> form_validation -> set_rules('email','email', 'trim|required|valid_email');
+					$this -> form_validation -> set_rules('password', 'password', 'trim|required');
 				}
 				else if($page == 'employee_detail')
 				{
-					$this ->	form_validation -> set_rules('salary','salary', 'trim|required|numeric');
-					$this ->	form_validation -> set_rules('position', 'Position', 'trim|required');
-					$this ->	form_validation -> set_rules('start_date', 'start date', 'trim|required');
-					$this ->	form_validation -> set_rules('current_status', 'current status', 'trim|required');
-					$this ->	form_validation -> set_rules('end_date', 'end date', 'trim');
+					$this -> form_validation -> set_rules('salary','salary', 'trim|required|numeric');
+					$this -> form_validation -> set_rules('position', 'Position', 'trim|required');
+					$this -> form_validation -> set_rules('start_date', 'start date', 'trim|required');
+					$this -> form_validation -> set_rules('current_status', 'current status', 'trim|required');
+					$this -> form_validation -> set_rules('end_date', 'end date', 'trim');
 				}
 				else
 				{
-					$this -> 	form_validation -> set_rules('first_name', 'first name', 'trim|required|max_length[12]');
-					$this ->	form_validation -> set_rules('last_name', 'last name', 'trim|required|max_length[12]');
-					$this ->	form_validation -> set_rules('email','email', 'trim|required|valid_email');
-					$this ->	form_validation -> set_rules('user_level', 'user type', 'trim|required');
+					$this -> form_validation -> set_rules('first_name', 'first name', 'trim|required|max_length[12]');
+					$this -> form_validation -> set_rules('last_name', 'last name', 'trim|required|max_length[12]');
+					$this -> form_validation -> set_rules('email','email', 'trim|required|valid_email');
+					$this -> form_validation -> set_rules('user_level', 'user type', 'trim|required');
 					if($page == 'add')
 					{
-						$this ->	form_validation -> set_rules('password', 'password', 'trim|required|matches[cpassword]');
-						$this ->	form_validation -> set_rules('cpassword', 'confirm password', 'trim|required');
+						$this -> form_validation -> set_rules('password', 'password', 'trim|required|matches[cpassword]');
+						$this -> form_validation -> set_rules('cpassword', 'confirm password', 'trim|required');
 					}
 				}
 		

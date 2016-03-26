@@ -8,7 +8,7 @@
 		* @package		CodeIgniter
 	 	* @subpackage	Controller
 	 	* @category		Controller
-	 	* @author		Dwiraj Chauhan
+	 	* @author		Dwiraj Chauhan <dwiraj.k.chauhan25@gmail.com>
 	 	* @link			localhost
 		*/
 		class Employee extends MY_Controller 
@@ -34,6 +34,47 @@
 				$parameters['query'] = $this -> Employees -> get_data();
 				$parameters['title'] = "View all employee";
 				$this->load_view('employee/viewemployee', $parameters);
+			}
+
+			/**
+			 * @function ajax_list
+			 * @param viod
+			 * @return json object
+			 *
+			 * this function show all user view file as default
+			 */
+			public function ajax_list()
+			{
+				$list = $this->Employees->get_datatables();
+				$data = array();
+				$no = $_POST['start'];
+				foreach ($list as $employee) {
+					$no++;
+					$row = array();
+					$row[] = $employee->id;
+					$row[] = $employee->first_name." ".$employee->last_name;
+					$row[] = $employee->email;
+					$row[] = $employee->position;
+					$row[] = $employee->start_date;
+					$row[] = $employee->current_status;
+					$row[] = $employee->end_date;
+					$row[] = $employee->last_login ? date('jS F Y, g:i a', strtotime($employee->last_login)) : "Not Login yet";
+
+					//add html for action
+					$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_person('."'".$employee->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                  	<a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$employee->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+
+					$data[] = $row;
+				}
+
+				$output = array(
+					"draw" => $_POST['draw'],
+					"recordsTotal" => $this->Employees->count_all(),
+					"recordsFiltered" => $this->Employees->count_filtered(),
+					"data" => $data,
+				);
+				//output to json format
+				echo json_encode($output);
 			}
 
 			/**

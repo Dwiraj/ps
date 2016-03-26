@@ -1,20 +1,20 @@
 	<?php 
 
 	 /**
-		* @Class 				Employees
-		* @package			CodeIgniter
-	 	* @subpackage		Model
-	 	* @category			Model
-	 	* @author				Dwiraj Chauhan
-	 	* @link					localhost
+		* @Class 		Employees
+		* @package		CodeIgniter
+	 	* @subpackage	Model
+	 	* @category		Model
+	 	* @author		Dwiraj Chauhan <dwiraj.k.chauhan25@gmail.com>
+	 	* @link			localhost
 		*/
 		class Employees extends CI_Model
 		{
 
-		 /**
+		   /**
 			* @function addemployee
 			* @param array $parameters
-			*	@return string
+			* @return string
 			*
 			* this function is for insert new user to database
 			*/
@@ -24,9 +24,9 @@
 				return $result;
 			}
 
-		/**
+		   /**
 			* @function get_data
-			*	@return array
+			* @return array
 			*
 			* this function is for show user list to admin only
 			*/
@@ -50,10 +50,10 @@
 				
 			}
 
-		 /**
+		   /**
 			* @function get_search
 			* @param array
-			*	@return array
+			* @return array
 			*
 			* this function is for show search result to table
 			*/
@@ -70,10 +70,10 @@
 				return $query->result_array();
 			}
 
-		 /**
+		   /**
 			* @function get_search_name
 			* @param array
-			*	@return array
+			* @return array
 			*
 			* this function is for show search from name as result to table
 			*/
@@ -90,10 +90,10 @@
 				return $query->result_array();
 			}
 
-		 /**
+		   /**
 			* @function get_searchsalary
 			* @param array
-			*	@return array
+			* @return array
 			*
 			* this function is for show search result to table by min-max salary 
 			*/
@@ -111,10 +111,10 @@
 				return $query->result_array();
 			}
 
-		 /**
+		   /**
 			* @function user_exist
 			* @param int
-			*	@return boolean
+			* @return boolean
 			*
 			* this function is for check into database that user is already exist 
 			*/
@@ -138,10 +138,10 @@
 				}
 			}
 
-		 /**
+		   /**
 			* @function update_user
 			* @param int
-			*	@return array
+			* @return array
 			*
 			* this function is for get single user data from database to update form
 			*/
@@ -154,30 +154,125 @@
 				return $query->row();
 			}
 
-		 /**
+		   /**
 			* @function update
 			* @param array
-			*	@return void
+			* @return void
 			*
 			* this function is for update single user in database
 			*/
-			public function update($parameters)
+			public function update_1($parameters)
 			{
-				$this	-> db -> where('employee_id', $parameters['employee_id']);
-				$this	-> db -> update('employees', $parameters);
+				$this -> db -> where('employee_id', $parameters['employee_id']);
+				$this -> db -> update('employees', $parameters);
 			} 
 
-		 /**
+		   /**
 			* @function add_image
 			* @param array
-			*	@return void
+			* @return void
 			*
 			* this function is for update single user in database
 			*/
 			public function add_image($data, $id)
 			{
-				$this	-> db -> where('employee_id', $id);
-				$this	-> db -> update('employees', array('profile_picture' => $data['file_name']));
-			} 
+				$this -> db -> where('employee_id', $id);
+				$this -> db -> update('employees', array('profile_picture' => $data['file_name']));
+			}
+
+			/************************************************************/
+			var $table = 'employees';
+			var $column = array('employee_id', 'first_name', 'last_name', 'salutation','father_name','mother_name','qualification', 'comment', 'salary', 'position', 'start_date', 'current_status', 'end_date', 'dob', 'address', 'phone_no', 'alternate_no', 'pan_no', 'bank_account_no', 'profile_picture');
+			var $order = array('id' => 'desc');
+
+			public function __construct()
+			{
+				parent::__construct();
+			}
+
+			private function _get_datatables_query()
+			{
+				$query = "SELECT * FROM `employees` JOIN `users` ON `employees`.`employee_id` = `users`.`id` WHERE `user_status` = 'Active' AND `user_level` = '1'";
+				$i = 0;
+				if($_POST['search']['value'])
+					$query .= "AND (";
+				foreach ($this->column as $item)
+				{
+					if($_POST['search']['value']){
+						$query .= "`$item` like '%".$_POST['search']['value']."%'";
+						if($i < (count($this->column)-1) )
+							$query .= " OR ";
+					}
+					$column[$i] = $item;
+					$i++;
+				}
+
+				if($_POST['search']['value'])
+					$query .= ")";
+
+				if(isset($_POST['order']))
+				{
+					$query .= " ORDER BY ". $column[$_POST['order']['0']['column']] ." ". $_POST['order']['0']['dir'];
+				}
+				else if(isset($this->order))
+				{
+					$order = $this->order;
+					$query .= " ORDER BY ". key($order) ." ". $order[key($order)];
+				}
+
+				if($_POST['length'] != -1)
+					$query .= " LIMIT ". $_POST['start'] .", ". $_POST['length'];
+
+				return $this->db->query($query);
+
+			}
+
+			function get_datatables()
+			{
+				$query = $this->_get_datatables_query();
+				return $query->result();
+			}
+
+			function count_filtered()
+			{
+				$query = $this->_get_datatables_query();
+				return $query->num_rows();
+			}
+
+			public function count_all()
+			{
+				$this->db->from($this->table);
+				$this -> db -> join('users', 'employees.employee_id = users.id');
+				$this -> db -> where('user_status', 'Active');
+				$this -> db -> where('user_level', '1');
+				return $this->db->count_all_results();
+			}
+
+			public function get_by_id($id)
+			{
+				$this->db->from($this->table);
+				$this->db->where('id',$id);
+				$query = $this->db->get();
+
+				return $query->row();
+			}
+
+			public function save($data)
+			{
+				$this->db->insert($this->table, $data);
+				return $this->db->insert_id();
+			}
+
+			public function update($where, $data)
+			{
+				$this->db->update($this->table, $data, $where);
+				return $this->db->affected_rows();
+			}
+
+			public function delete_by_id($id)
+			{
+				$this->db->where('id', $id);
+				$this->db->delete($this->table);
+			}
 		}
 	?>

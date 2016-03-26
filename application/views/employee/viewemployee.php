@@ -1,8 +1,8 @@
-<div>
+<div class="container-fluid">
   	<div class="col-sm-12">
   		<p align="center"><span class="h2">Employee list</span></p><br/>
   	</div>
-	<div id="search">
+	<!--<div id="search">
 		<p align="center"><button id="searchbtn" class="button-btn">Search</button></p>
 		<div id="subsearch" style="display:none; align:center;">
 			<form name="searchfrm" method="post">
@@ -83,29 +83,28 @@
 				</table>
 			</form>
 		</div>
-	</div>
+	</div>-->
 	<div >
-		<table id="tblData" class="table">
+		<table id="tblEmployee" class="table-striped table-hover">
 			<thead>
 				<tr>
-					<th>No</th>
+					<th>ID</th>
 					<th>Name</th>
 					<th>Email</th>
-					<th>User Type</th>
-					<th>Salary</th>
 					<th>Position</th>
 					<th>Start date</th>
 					<th>Current status</th>
 					<th>End date</th>
+					<th>Last Login</th>
 					<th>Action</th>
 				</tr>
 			</thead>
-			<tbody id="getdata">
+			<!--<tbody id="getdata">
 				<?php
-				if($query)
+/*				if($query)
 				{
 				$n=0;
-				foreach ($query as $key) 
+				foreach ($query as $key)
 				{
 					$n++;
 					if($key['current_status'] == "Resigned")
@@ -116,36 +115,36 @@
 					{
 						echo '<tr>';
 					}
-					?>
-						<td><?php echo $n; ?></td>
-						<td><?php echo $key['first_name']." ".$key['last_name']; ?></td>
-						<td><?php echo $key['email']; ?></td>
-						<td><?php if($key['user_level']==1){ echo "Employee"; }else{ echo "Admin"; }  ?></td>
-						<td><?php echo $key['salary']; ?></td>
-						<td><?php echo $key['position']; ?></td>
-						<td><?php echo $key['start_date']; ?></td>
-						<td><?php echo $key['current_status']; ?></td>
-						<td><?php if($key['end_date']=='0000-00-00' || $key['end_date']==""){ echo "None"; }else{ echo $key['end_date']; }  ?></td>
+					*/?>
+						<td><?php /*echo $n; */?></td>
+						<td><?php /*echo $key['first_name']." ".$key['last_name']; */?></td>
+						<td><?php /*echo $key['email']; */?></td>
+						<td><?php /*if($key['user_level']==1){ echo "Employee"; }else{ echo "Admin"; }  */?></td>
+						<td><?php /*echo $key['salary']; */?></td>
+						<td><?php /*echo $key['position']; */?></td>
+						<td><?php /*echo $key['start_date']; */?></td>
+						<td><?php /*echo $key['current_status']; */?></td>
+						<td><?php /*if($key['end_date']=='0000-00-00' || $key['end_date']==""){ echo "None"; }else{ echo $key['end_date']; }  */?></td>
 						<td>
 							<a href="#"><button data-toggle="modal" data-target="#myModal" style="width: 90px;background-color: #079655;" class="mybutton-view">Increament</button></a>
-							<a href="<?php echo base_url();?>view-employee-detail/<?php echo $key['id']; ?>"><button class="mybutton-view">View</button></a>
-							<a href="<?php echo base_url();?>admin/update/<?php echo $key['id']; ?>"><button class="mybutton-update">Edit</button></a>
-							<button onclick="deleteuser(<?php echo $key['id']; ?>);" class="mybutton-delete">Delete</button>
+							<a href="<?php /*echo base_url();*/?>view-employee-detail/<?php /*echo $key['id']; */?>"><button class="mybutton-view">View</button></a>
+							<a href="<?php /*echo base_url();*/?>admin/update/<?php /*echo $key['id']; */?>"><button class="mybutton-update">Edit</button></a>
+							<button onclick="deleteuser(<?php /*echo $key['id']; */?>);" class="mybutton-delete">Delete</button>
 						</td>
 					</tr>
 					<?php
-						}
+/*						}
 					}
 					else
 					{
-						?>
+						*/?>
 						<tr>
 							<td align="center" colspan="10">There is no data in table to show</td>
 						</tr>
 						<?php
-					}
-					?>
-			</tbody>
+/*					}
+					*/?>
+			</tbody>-->
 		</table>
          <!-- Modal -->
          <div class="modal fade" id="myModal" role="dialog">

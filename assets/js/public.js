@@ -46948,7 +46948,7 @@ $('#adduser-form').validate ({
         form1.submit();
     }
 });;/**
- * Created by Dwiraj on 07-Mar-16.
+ * Created by Dwiraj <dwiraj.k.chauhan25@gmail.com> on 07-Mar-16.
  */
 
 var save_method; //for save method string
@@ -46962,6 +46962,27 @@ $(document).ready(function() {
         // Load data for the table's content from an Ajax source
         "ajax": {
             "url": "admin/ajax_list",
+            "type": "POST"
+        },
+
+        //Set column definition initialisation properties.
+        "columnDefs": [
+            {
+                "targets": [ -1 ], //last column
+                "orderable": false, //set not orderable
+            },
+        ],
+
+    });
+
+    table = $('#tblEmployee').DataTable({
+
+        "processing": true, //Feature control the processing indicator.
+        "serverSide": true, //Feature control DataTables' server-side processing mode.
+
+        // Load data for the table's content from an Ajax source
+        "ajax": {
+            "url": "employee/ajax_list",
             "type": "POST"
         },
 
@@ -47071,7 +47092,6 @@ function delete_person(id)
                 alert('Error adding / update data');
             }
         });
-
     }
 }
 ;/**

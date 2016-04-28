@@ -46872,7 +46872,10 @@ var tooltip = $.widget( "ui.tooltip", {
 
 
 
-}));;/*! jQuery Validation Plugin - v1.14.0 - 6/30/2015
+}));;/**
+ * Created by Dwiraj<dwiraj.k.chauhan25@gmail.com> on 28-Mar-16.
+ */
+(function(a,b){if(typeof define==="function"&&define.amd){define(["jquery"],b)}else{if(typeof exports==="object"){module.exports=b(require("jquery"))}else{a.bootbox=b(a.jQuery)}}}(this,function init(i,c){var m={dialog:"<div class='bootbox modal' tabindex='-1' role='dialog'><div class='modal-dialog'><div class='modal-content'><div class='modal-body'><div class='bootbox-body'></div></div></div></div></div>",header:"<div class='modal-header'><h4 class='modal-title'></h4></div>",footer:"<div class='modal-footer'></div>",closeButton:"<button type='button' class='bootbox-close-button close' data-dismiss='modal' aria-hidden='true'>&times;</button>",form:"<form class='bootbox-form'></form>",inputs:{text:"<input class='bootbox-input bootbox-input-text form-control' autocomplete=off type=text />",textarea:"<textarea class='bootbox-input bootbox-input-textarea form-control'></textarea>",email:"<input class='bootbox-input bootbox-input-email form-control' autocomplete='off' type='email' />",select:"<select class='bootbox-input bootbox-input-select form-control'></select>",checkbox:"<div class='checkbox'><label><input class='bootbox-input bootbox-input-checkbox' type='checkbox' /></label></div>",date:"<input class='bootbox-input bootbox-input-date form-control' autocomplete=off type='date' />",time:"<input class='bootbox-input bootbox-input-time form-control' autocomplete=off type='time' />",number:"<input class='bootbox-input bootbox-input-number form-control' autocomplete=off type='number' />",password:"<input class='bootbox-input bootbox-input-password form-control' autocomplete='off' type='password' />"}};var f={locale:"en",backdrop:"static",animate:true,className:null,closeButton:true,show:true,container:"body"};var h={};function p(r){var q=a[f.locale];return q?q[r]:a.en[r]}function d(s,r,t){s.stopPropagation();s.preventDefault();var q=i.isFunction(t)&&t.call(r,s)===false;if(!q){r.modal("hide")}}function j(s){var q,r=0;for(q in s){r++}return r}function k(s,r){var q=0;i.each(s,function(t,u){r(t,u,q++)})}function b(q){var s;var r;if(typeof q!=="object"){throw new Error("Please supply an object of options")}if(!q.message){throw new Error("Please specify a message")}q=i.extend({},f,q);if(!q.buttons){q.buttons={}}s=q.buttons;r=j(s);k(s,function(v,u,t){if(i.isFunction(u)){u=s[v]={callback:u}}if(i.type(u)!=="object"){throw new Error("button with key "+v+" must be an object")}if(!u.label){u.label=v}if(!u.className){if(r<=2&&t===r-1){u.className="btn-primary"}else{u.className="btn-default"}}});return q}function g(r,s){var t=r.length;var q={};if(t<1||t>2){throw new Error("Invalid argument length")}if(t===2||typeof r[0]==="string"){q[s[0]]=r[0];q[s[1]]=r[1]}else{q=r[0]}return q}function l(s,q,r){return i.extend(true,{},s,g(q,r))}function e(t,u,s,r){var q={className:"bootbox-"+t,buttons:o.apply(null,u)};return n(l(q,r,s),u)}function o(){var u={};for(var s=0,q=arguments.length;s<q;s++){var t=arguments[s];var r=t.toLowerCase();var v=t.toUpperCase();u[r]={label:p(v)}}return u}function n(q,s){var r={};k(s,function(t,u){r[u]=true});k(q.buttons,function(t){if(r[t]===c){throw new Error("button key "+t+" is not allowed (options are "+s.join("\n")+")")}});return q}h.alert=function(){var q;q=e("alert",["ok"],["message","callback"],arguments);if(q.callback&&!i.isFunction(q.callback)){throw new Error("alert requires callback property to be a function when provided")}q.buttons.ok.callback=q.onEscape=function(){if(i.isFunction(q.callback)){return q.callback.call(this)}return true};return h.dialog(q)};h.confirm=function(){var q;q=e("confirm",["cancel","confirm"],["message","callback"],arguments);q.buttons.cancel.callback=q.onEscape=function(){return q.callback.call(this,false)};q.buttons.confirm.callback=function(){return q.callback.call(this,true)};if(!i.isFunction(q.callback)){throw new Error("confirm requires a callback")}return h.dialog(q)};h.prompt=function(){var y;var t;var v;var q;var w;var s;var u;q=i(m.form);t={className:"bootbox-prompt",buttons:o("cancel","confirm"),value:"",inputType:"text"};y=n(l(t,arguments,["title","callback"]),["cancel","confirm"]);s=(y.show===c)?true:y.show;y.message=q;y.buttons.cancel.callback=y.onEscape=function(){return y.callback.call(this,null)};y.buttons.confirm.callback=function(){var A;switch(y.inputType){case"text":case"textarea":case"email":case"select":case"date":case"time":case"number":case"password":A=w.val();break;case"checkbox":var z=w.find("input:checked");A=[];k(z,function(B,C){A.push(i(C).val())});break}return y.callback.call(this,A)};y.show=false;if(!y.title){throw new Error("prompt requires a title")}if(!i.isFunction(y.callback)){throw new Error("prompt requires a callback")}if(!m.inputs[y.inputType]){throw new Error("invalid prompt type")}w=i(m.inputs[y.inputType]);switch(y.inputType){case"text":case"textarea":case"email":case"date":case"time":case"number":case"password":w.val(y.value);break;case"select":var r={};u=y.inputOptions||[];if(!i.isArray(u)){throw new Error("Please pass an array of input options")}if(!u.length){throw new Error("prompt with select requires options")}k(u,function(z,A){var B=w;if(A.value===c||A.text===c){throw new Error("given options in wrong format")}if(A.group){if(!r[A.group]){r[A.group]=i("<optgroup/>").attr("label",A.group)}B=r[A.group]}B.append("<option value='"+A.value+"'>"+A.text+"</option>")});k(r,function(z,A){w.append(A)});w.val(y.value);break;case"checkbox":var x=i.isArray(y.value)?y.value:[y.value];u=y.inputOptions||[];if(!u.length){throw new Error("prompt with checkbox requires options")}if(!u[0].value||!u[0].text){throw new Error("given options in wrong format")}w=i("<div/>");k(u,function(z,A){var B=i(m.inputs[y.inputType]);B.find("input").attr("value",A.value);B.find("label").append(A.text);k(x,function(C,D){if(D===A.value){B.find("input").prop("checked",true)}});w.append(B)});break}if(y.placeholder){w.attr("placeholder",y.placeholder)}if(y.pattern){w.attr("pattern",y.pattern)}if(y.maxlength){w.attr("maxlength",y.maxlength)}q.append(w);q.on("submit",function(z){z.preventDefault();z.stopPropagation();v.find(".btn-primary").click()});v=h.dialog(y);v.off("shown.bs.modal");v.on("shown.bs.modal",function(){w.focus()});if(s===true){v.modal("show")}return v};h.dialog=function(t){t=b(t);var u=i(m.dialog);var r=u.find(".modal-dialog");var q=u.find(".modal-body");var x=t.buttons;var v="";var w={onEscape:t.onEscape};if(i.fn.modal===c){throw new Error("$.fn.modal is not defined; please double check you have included the Bootstrap JavaScript library. See http://getbootstrap.com/javascript/ for more details.")}k(x,function(z,y){v+="<button data-bb-handler='"+z+"' type='button' class='btn "+y.className+"'>"+y.label+"</button>";w[z]=y.callback});q.find(".bootbox-body").html(t.message);if(t.animate===true){u.addClass("fade")}if(t.className){u.addClass(t.className)}if(t.size==="large"){r.addClass("modal-lg")}else{if(t.size==="small"){r.addClass("modal-sm")}}if(t.title){q.before(m.header)}if(t.closeButton){var s=i(m.closeButton);if(t.title){u.find(".modal-header").prepend(s)}else{s.css("margin-top","-10px").prependTo(q)}}if(t.title){u.find(".modal-title").html(t.title)}if(v.length){q.after(m.footer);u.find(".modal-footer").html(v)}u.on("hidden.bs.modal",function(y){if(y.target===this){u.remove()}});u.on("shown.bs.modal",function(){u.find(".btn-primary:first").focus()});if(t.backdrop!=="static"){u.on("click.dismiss.bs.modal",function(y){if(u.children(".modal-backdrop").length){y.currentTarget=u.children(".modal-backdrop").get(0)}if(y.target!==y.currentTarget){return}u.trigger("escape.close.bb")})}u.on("escape.close.bb",function(y){if(w.onEscape){d(y,u,w.onEscape)}});u.on("click",".modal-footer button",function(z){var y=i(this).data("bb-handler");d(z,u,w[y])});u.on("click",".bootbox-close-button",function(y){d(y,u,w.onEscape)});u.on("keyup",function(y){if(y.which===27){u.trigger("escape.close.bb")}});i(t.container).append(u);u.modal({backdrop:t.backdrop?"static":false,keyboard:false,show:false});if(t.show){u.modal("show")}return u};h.setDefaults=function(){var q={};if(arguments.length===2){q[arguments[0]]=arguments[1]}else{q=arguments[0]}i.extend(f,q)};h.hideAll=function(){i(".bootbox").modal("hide");return h};var a={bg_BG:{OK:"Ок",CANCEL:"Отказ",CONFIRM:"Потвърждавам"},br:{OK:"OK",CANCEL:"Cancelar",CONFIRM:"Sim"},cs:{OK:"OK",CANCEL:"Zrušit",CONFIRM:"Potvrdit"},da:{OK:"OK",CANCEL:"Annuller",CONFIRM:"Accepter"},de:{OK:"OK",CANCEL:"Abbrechen",CONFIRM:"Akzeptieren"},el:{OK:"Εντάξει",CANCEL:"Ακύρωση",CONFIRM:"Επιβεβαίωση"},en:{OK:"OK",CANCEL:"Cancel",CONFIRM:"OK"},es:{OK:"OK",CANCEL:"Cancelar",CONFIRM:"Aceptar"},et:{OK:"OK",CANCEL:"Katkesta",CONFIRM:"OK"},fa:{OK:"قبول",CANCEL:"لغو",CONFIRM:"تایید"},fi:{OK:"OK",CANCEL:"Peruuta",CONFIRM:"OK"},fr:{OK:"OK",CANCEL:"Annuler",CONFIRM:"D'accord"},he:{OK:"אישור",CANCEL:"ביטול",CONFIRM:"אישור"},hu:{OK:"OK",CANCEL:"Mégsem",CONFIRM:"Megerősít"},hr:{OK:"OK",CANCEL:"Odustani",CONFIRM:"Potvrdi"},id:{OK:"OK",CANCEL:"Batal",CONFIRM:"OK"},it:{OK:"OK",CANCEL:"Annulla",CONFIRM:"Conferma"},ja:{OK:"OK",CANCEL:"キャンセル",CONFIRM:"確認"},lt:{OK:"Gerai",CANCEL:"Atšaukti",CONFIRM:"Patvirtinti"},lv:{OK:"Labi",CANCEL:"Atcelt",CONFIRM:"Apstiprināt"},nl:{OK:"OK",CANCEL:"Annuleren",CONFIRM:"Accepteren"},no:{OK:"OK",CANCEL:"Avbryt",CONFIRM:"OK"},pl:{OK:"OK",CANCEL:"Anuluj",CONFIRM:"Potwierdź"},pt:{OK:"OK",CANCEL:"Cancelar",CONFIRM:"Confirmar"},ru:{OK:"OK",CANCEL:"Отмена",CONFIRM:"Применить"},sq:{OK:"OK",CANCEL:"Anulo",CONFIRM:"Prano"},sv:{OK:"OK",CANCEL:"Avbryt",CONFIRM:"OK"},th:{OK:"ตกลง",CANCEL:"ยกเลิก",CONFIRM:"ยืนยัน"},tr:{OK:"Tamam",CANCEL:"İptal",CONFIRM:"Onayla"},zh_CN:{OK:"OK",CANCEL:"取消",CONFIRM:"确认"},zh_TW:{OK:"OK",CANCEL:"取消",CONFIRM:"確認"}};h.addLocale=function(r,q){i.each(["OK","CANCEL","CONFIRM"],function(t,s){if(!q[s]){throw new Error("Please supply a translation for '"+s+"'")}});a[r]={OK:q.OK,CANCEL:q.CANCEL,CONFIRM:q.CONFIRM};return h};h.removeLocale=function(q){delete a[q];return h};h.setLocale=function(q){return h.setDefaults("locale",q)};h.init=function(q){return init(q||i)};return h}));;/*! jQuery Validation Plugin - v1.14.0 - 6/30/2015
  * http://jqueryvalidation.org/
  * Copyright (c) 2015 Jörn Zaefferer; Licensed MIT */
 !function(a){"function"==typeof define&&define.amd?define(["jquery"],a):a(jQuery)}(function(a){a.extend(a.fn,{validate:function(b){if(!this.length)return void(b&&b.debug&&window.console&&console.warn("Nothing selected, can't validate, returning nothing."));var c=a.data(this[0],"validator");return c?c:(this.attr("novalidate","novalidate"),c=new a.validator(b,this[0]),a.data(this[0],"validator",c),c.settings.onsubmit&&(this.on("click.validate",":submit",function(b){c.settings.submitHandler&&(c.submitButton=b.target),a(this).hasClass("cancel")&&(c.cancelSubmit=!0),void 0!==a(this).attr("formnovalidate")&&(c.cancelSubmit=!0)}),this.on("submit.validate",function(b){function d(){var d,e;return c.settings.submitHandler?(c.submitButton&&(d=a("<input type='hidden'/>").attr("name",c.submitButton.name).val(a(c.submitButton).val()).appendTo(c.currentForm)),e=c.settings.submitHandler.call(c,c.currentForm,b),c.submitButton&&d.remove(),void 0!==e?e:!1):!0}return c.settings.debug&&b.preventDefault(),c.cancelSubmit?(c.cancelSubmit=!1,d()):c.form()?c.pendingRequest?(c.formSubmitted=!0,!1):d():(c.focusInvalid(),!1)})),c)},valid:function(){var b,c,d;return a(this[0]).is("form")?b=this.validate().form():(d=[],b=!0,c=a(this[0].form).validate(),this.each(function(){b=c.element(this)&&b,d=d.concat(c.errorList)}),c.errorList=d),b},rules:function(b,c){var d,e,f,g,h,i,j=this[0];if(b)switch(d=a.data(j.form,"validator").settings,e=d.rules,f=a.validator.staticRules(j),b){case"add":a.extend(f,a.validator.normalizeRule(c)),delete f.messages,e[j.name]=f,c.messages&&(d.messages[j.name]=a.extend(d.messages[j.name],c.messages));break;case"remove":return c?(i={},a.each(c.split(/\s/),function(b,c){i[c]=f[c],delete f[c],"required"===c&&a(j).removeAttr("aria-required")}),i):(delete e[j.name],f)}return g=a.validator.normalizeRules(a.extend({},a.validator.classRules(j),a.validator.attributeRules(j),a.validator.dataRules(j),a.validator.staticRules(j)),j),g.required&&(h=g.required,delete g.required,g=a.extend({required:h},g),a(j).attr("aria-required","true")),g.remote&&(h=g.remote,delete g.remote,g=a.extend(g,{remote:h})),g}}),a.extend(a.expr[":"],{blank:function(b){return!a.trim(""+a(b).val())},filled:function(b){return!!a.trim(""+a(b).val())},unchecked:function(b){return!a(b).prop("checked")}}),a.validator=function(b,c){this.settings=a.extend(!0,{},a.validator.defaults,b),this.currentForm=c,this.init()},a.validator.format=function(b,c){return 1===arguments.length?function(){var c=a.makeArray(arguments);return c.unshift(b),a.validator.format.apply(this,c)}:(arguments.length>2&&c.constructor!==Array&&(c=a.makeArray(arguments).slice(1)),c.constructor!==Array&&(c=[c]),a.each(c,function(a,c){b=b.replace(new RegExp("\\{"+a+"\\}","g"),function(){return c})}),b)},a.extend(a.validator,{defaults:{messages:{},groups:{},rules:{},errorClass:"error",validClass:"valid",errorElement:"label",focusCleanup:!1,focusInvalid:!0,errorContainer:a([]),errorLabelContainer:a([]),onsubmit:!0,ignore:":hidden",ignoreTitle:!1,onfocusin:function(a){this.lastActive=a,this.settings.focusCleanup&&(this.settings.unhighlight&&this.settings.unhighlight.call(this,a,this.settings.errorClass,this.settings.validClass),this.hideThese(this.errorsFor(a)))},onfocusout:function(a){this.checkable(a)||!(a.name in this.submitted)&&this.optional(a)||this.element(a)},onkeyup:function(b,c){var d=[16,17,18,20,35,36,37,38,39,40,45,144,225];9===c.which&&""===this.elementValue(b)||-1!==a.inArray(c.keyCode,d)||(b.name in this.submitted||b===this.lastElement)&&this.element(b)},onclick:function(a){a.name in this.submitted?this.element(a):a.parentNode.name in this.submitted&&this.element(a.parentNode)},highlight:function(b,c,d){"radio"===b.type?this.findByName(b.name).addClass(c).removeClass(d):a(b).addClass(c).removeClass(d)},unhighlight:function(b,c,d){"radio"===b.type?this.findByName(b.name).removeClass(c).addClass(d):a(b).removeClass(c).addClass(d)}},setDefaults:function(b){a.extend(a.validator.defaults,b)},messages:{required:"This field is required.",remote:"Please fix this field.",email:"Please enter a valid email address.",url:"Please enter a valid URL.",date:"Please enter a valid date.",dateISO:"Please enter a valid date ( ISO ).",number:"Please enter a valid number.",digits:"Please enter only digits.",creditcard:"Please enter a valid credit card number.",equalTo:"Please enter the same value again.",maxlength:a.validator.format("Please enter no more than {0} characters."),minlength:a.validator.format("Please enter at least {0} characters."),rangelength:a.validator.format("Please enter a value between {0} and {1} characters long."),range:a.validator.format("Please enter a value between {0} and {1}."),max:a.validator.format("Please enter a value less than or equal to {0}."),min:a.validator.format("Please enter a value greater than or equal to {0}.")},autoCreateRanges:!1,prototype:{init:function(){function b(b){var c=a.data(this.form,"validator"),d="on"+b.type.replace(/^validate/,""),e=c.settings;e[d]&&!a(this).is(e.ignore)&&e[d].call(c,this,b)}this.labelContainer=a(this.settings.errorLabelContainer),this.errorContext=this.labelContainer.length&&this.labelContainer||a(this.currentForm),this.containers=a(this.settings.errorContainer).add(this.settings.errorLabelContainer),this.submitted={},this.valueCache={},this.pendingRequest=0,this.pending={},this.invalid={},this.reset();var c,d=this.groups={};a.each(this.settings.groups,function(b,c){"string"==typeof c&&(c=c.split(/\s/)),a.each(c,function(a,c){d[c]=b})}),c=this.settings.rules,a.each(c,function(b,d){c[b]=a.validator.normalizeRule(d)}),a(this.currentForm).on("focusin.validate focusout.validate keyup.validate",":text, [type='password'], [type='file'], select, textarea, [type='number'], [type='search'], [type='tel'], [type='url'], [type='email'], [type='datetime'], [type='date'], [type='month'], [type='week'], [type='time'], [type='datetime-local'], [type='range'], [type='color'], [type='radio'], [type='checkbox']",b).on("click.validate","select, option, [type='radio'], [type='checkbox']",b),this.settings.invalidHandler&&a(this.currentForm).on("invalid-form.validate",this.settings.invalidHandler),a(this.currentForm).find("[required], [data-rule-required], .required").attr("aria-required","true")},form:function(){return this.checkForm(),a.extend(this.submitted,this.errorMap),this.invalid=a.extend({},this.errorMap),this.valid()||a(this.currentForm).triggerHandler("invalid-form",[this]),this.showErrors(),this.valid()},checkForm:function(){this.prepareForm();for(var a=0,b=this.currentElements=this.elements();b[a];a++)this.check(b[a]);return this.valid()},element:function(b){var c=this.clean(b),d=this.validationTargetFor(c),e=!0;return this.lastElement=d,void 0===d?delete this.invalid[c.name]:(this.prepareElement(d),this.currentElements=a(d),e=this.check(d)!==!1,e?delete this.invalid[d.name]:this.invalid[d.name]=!0),a(b).attr("aria-invalid",!e),this.numberOfInvalids()||(this.toHide=this.toHide.add(this.containers)),this.showErrors(),e},showErrors:function(b){if(b){a.extend(this.errorMap,b),this.errorList=[];for(var c in b)this.errorList.push({message:b[c],element:this.findByName(c)[0]});this.successList=a.grep(this.successList,function(a){return!(a.name in b)})}this.settings.showErrors?this.settings.showErrors.call(this,this.errorMap,this.errorList):this.defaultShowErrors()},resetForm:function(){a.fn.resetForm&&a(this.currentForm).resetForm(),this.submitted={},this.lastElement=null,this.prepareForm(),this.hideErrors();var b,c=this.elements().removeData("previousValue").removeAttr("aria-invalid");if(this.settings.unhighlight)for(b=0;c[b];b++)this.settings.unhighlight.call(this,c[b],this.settings.errorClass,"");else c.removeClass(this.settings.errorClass)},numberOfInvalids:function(){return this.objectLength(this.invalid)},objectLength:function(a){var b,c=0;for(b in a)c++;return c},hideErrors:function(){this.hideThese(this.toHide)},hideThese:function(a){a.not(this.containers).text(""),this.addWrapper(a).hide()},valid:function(){return 0===this.size()},size:function(){return this.errorList.length},focusInvalid:function(){if(this.settings.focusInvalid)try{a(this.findLastActive()||this.errorList.length&&this.errorList[0].element||[]).filter(":visible").focus().trigger("focusin")}catch(b){}},findLastActive:function(){var b=this.lastActive;return b&&1===a.grep(this.errorList,function(a){return a.element.name===b.name}).length&&b},elements:function(){var b=this,c={};return a(this.currentForm).find("input, select, textarea").not(":submit, :reset, :image, :disabled").not(this.settings.ignore).filter(function(){return!this.name&&b.settings.debug&&window.console&&console.error("%o has no name assigned",this),this.name in c||!b.objectLength(a(this).rules())?!1:(c[this.name]=!0,!0)})},clean:function(b){return a(b)[0]},errors:function(){var b=this.settings.errorClass.split(" ").join(".");return a(this.settings.errorElement+"."+b,this.errorContext)},reset:function(){this.successList=[],this.errorList=[],this.errorMap={},this.toShow=a([]),this.toHide=a([]),this.currentElements=a([])},prepareForm:function(){this.reset(),this.toHide=this.errors().add(this.containers)},prepareElement:function(a){this.reset(),this.toHide=this.errorsFor(a)},elementValue:function(b){var c,d=a(b),e=b.type;return"radio"===e||"checkbox"===e?this.findByName(b.name).filter(":checked").val():"number"===e&&"undefined"!=typeof b.validity?b.validity.badInput?!1:d.val():(c=d.val(),"string"==typeof c?c.replace(/\r/g,""):c)},check:function(b){b=this.validationTargetFor(this.clean(b));var c,d,e,f=a(b).rules(),g=a.map(f,function(a,b){return b}).length,h=!1,i=this.elementValue(b);for(d in f){e={method:d,parameters:f[d]};try{if(c=a.validator.methods[d].call(this,i,b,e.parameters),"dependency-mismatch"===c&&1===g){h=!0;continue}if(h=!1,"pending"===c)return void(this.toHide=this.toHide.not(this.errorsFor(b)));if(!c)return this.formatAndAdd(b,e),!1}catch(j){throw this.settings.debug&&window.console&&console.log("Exception occurred when checking element "+b.id+", check the '"+e.method+"' method.",j),j instanceof TypeError&&(j.message+=".  Exception occurred when checking element "+b.id+", check the '"+e.method+"' method."),j}}if(!h)return this.objectLength(f)&&this.successList.push(b),!0},customDataMessage:function(b,c){return a(b).data("msg"+c.charAt(0).toUpperCase()+c.substring(1).toLowerCase())||a(b).data("msg")},customMessage:function(a,b){var c=this.settings.messages[a];return c&&(c.constructor===String?c:c[b])},findDefined:function(){for(var a=0;a<arguments.length;a++)if(void 0!==arguments[a])return arguments[a];return void 0},defaultMessage:function(b,c){return this.findDefined(this.customMessage(b.name,c),this.customDataMessage(b,c),!this.settings.ignoreTitle&&b.title||void 0,a.validator.messages[c],"<strong>Warning: No message defined for "+b.name+"</strong>")},formatAndAdd:function(b,c){var d=this.defaultMessage(b,c.method),e=/\$?\{(\d+)\}/g;"function"==typeof d?d=d.call(this,c.parameters,b):e.test(d)&&(d=a.validator.format(d.replace(e,"{$1}"),c.parameters)),this.errorList.push({message:d,element:b,method:c.method}),this.errorMap[b.name]=d,this.submitted[b.name]=d},addWrapper:function(a){return this.settings.wrapper&&(a=a.add(a.parent(this.settings.wrapper))),a},defaultShowErrors:function(){var a,b,c;for(a=0;this.errorList[a];a++)c=this.errorList[a],this.settings.highlight&&this.settings.highlight.call(this,c.element,this.settings.errorClass,this.settings.validClass),this.showLabel(c.element,c.message);if(this.errorList.length&&(this.toShow=this.toShow.add(this.containers)),this.settings.success)for(a=0;this.successList[a];a++)this.showLabel(this.successList[a]);if(this.settings.unhighlight)for(a=0,b=this.validElements();b[a];a++)this.settings.unhighlight.call(this,b[a],this.settings.errorClass,this.settings.validClass);this.toHide=this.toHide.not(this.toShow),this.hideErrors(),this.addWrapper(this.toShow).show()},validElements:function(){return this.currentElements.not(this.invalidElements())},invalidElements:function(){return a(this.errorList).map(function(){return this.element})},showLabel:function(b,c){var d,e,f,g=this.errorsFor(b),h=this.idOrName(b),i=a(b).attr("aria-describedby");g.length?(g.removeClass(this.settings.validClass).addClass(this.settings.errorClass),g.html(c)):(g=a("<"+this.settings.errorElement+">").attr("id",h+"-error").addClass(this.settings.errorClass).html(c||""),d=g,this.settings.wrapper&&(d=g.hide().show().wrap("<"+this.settings.wrapper+"/>").parent()),this.labelContainer.length?this.labelContainer.append(d):this.settings.errorPlacement?this.settings.errorPlacement(d,a(b)):d.insertAfter(b),g.is("label")?g.attr("for",h):0===g.parents("label[for='"+h+"']").length&&(f=g.attr("id").replace(/(:|\.|\[|\]|\$)/g,"\\$1"),i?i.match(new RegExp("\\b"+f+"\\b"))||(i+=" "+f):i=f,a(b).attr("aria-describedby",i),e=this.groups[b.name],e&&a.each(this.groups,function(b,c){c===e&&a("[name='"+b+"']",this.currentForm).attr("aria-describedby",g.attr("id"))}))),!c&&this.settings.success&&(g.text(""),"string"==typeof this.settings.success?g.addClass(this.settings.success):this.settings.success(g,b)),this.toShow=this.toShow.add(g)},errorsFor:function(b){var c=this.idOrName(b),d=a(b).attr("aria-describedby"),e="label[for='"+c+"'], label[for='"+c+"'] *";return d&&(e=e+", #"+d.replace(/\s+/g,", #")),this.errors().filter(e)},idOrName:function(a){return this.groups[a.name]||(this.checkable(a)?a.name:a.id||a.name)},validationTargetFor:function(b){return this.checkable(b)&&(b=this.findByName(b.name)),a(b).not(this.settings.ignore)[0]},checkable:function(a){return/radio|checkbox/i.test(a.type)},findByName:function(b){return a(this.currentForm).find("[name='"+b+"']")},getLength:function(b,c){switch(c.nodeName.toLowerCase()){case"select":return a("option:selected",c).length;case"input":if(this.checkable(c))return this.findByName(c.name).filter(":checked").length}return b.length},depend:function(a,b){return this.dependTypes[typeof a]?this.dependTypes[typeof a](a,b):!0},dependTypes:{"boolean":function(a){return a},string:function(b,c){return!!a(b,c.form).length},"function":function(a,b){return a(b)}},optional:function(b){var c=this.elementValue(b);return!a.validator.methods.required.call(this,c,b)&&"dependency-mismatch"},startRequest:function(a){this.pending[a.name]||(this.pendingRequest++,this.pending[a.name]=!0)},stopRequest:function(b,c){this.pendingRequest--,this.pendingRequest<0&&(this.pendingRequest=0),delete this.pending[b.name],c&&0===this.pendingRequest&&this.formSubmitted&&this.form()?(a(this.currentForm).submit(),this.formSubmitted=!1):!c&&0===this.pendingRequest&&this.formSubmitted&&(a(this.currentForm).triggerHandler("invalid-form",[this]),this.formSubmitted=!1)},previousValue:function(b){return a.data(b,"previousValue")||a.data(b,"previousValue",{old:null,valid:!0,message:this.defaultMessage(b,"remote")})},destroy:function(){this.resetForm(),a(this.currentForm).off(".validate").removeData("validator")}},classRuleSettings:{required:{required:!0},email:{email:!0},url:{url:!0},date:{date:!0},dateISO:{dateISO:!0},number:{number:!0},digits:{digits:!0},creditcard:{creditcard:!0}},addClassRules:function(b,c){b.constructor===String?this.classRuleSettings[b]=c:a.extend(this.classRuleSettings,b)},classRules:function(b){var c={},d=a(b).attr("class");return d&&a.each(d.split(" "),function(){this in a.validator.classRuleSettings&&a.extend(c,a.validator.classRuleSettings[this])}),c},normalizeAttributeRule:function(a,b,c,d){/min|max/.test(c)&&(null===b||/number|range|text/.test(b))&&(d=Number(d),isNaN(d)&&(d=void 0)),d||0===d?a[c]=d:b===c&&"range"!==b&&(a[c]=!0)},attributeRules:function(b){var c,d,e={},f=a(b),g=b.getAttribute("type");for(c in a.validator.methods)"required"===c?(d=b.getAttribute(c),""===d&&(d=!0),d=!!d):d=f.attr(c),this.normalizeAttributeRule(e,g,c,d);return e.maxlength&&/-1|2147483647|524288/.test(e.maxlength)&&delete e.maxlength,e},dataRules:function(b){var c,d,e={},f=a(b),g=b.getAttribute("type");for(c in a.validator.methods)d=f.data("rule"+c.charAt(0).toUpperCase()+c.substring(1).toLowerCase()),this.normalizeAttributeRule(e,g,c,d);return e},staticRules:function(b){var c={},d=a.data(b.form,"validator");return d.settings.rules&&(c=a.validator.normalizeRule(d.settings.rules[b.name])||{}),c},normalizeRules:function(b,c){return a.each(b,function(d,e){if(e===!1)return void delete b[d];if(e.param||e.depends){var f=!0;switch(typeof e.depends){case"string":f=!!a(e.depends,c.form).length;break;case"function":f=e.depends.call(c,c)}f?b[d]=void 0!==e.param?e.param:!0:delete b[d]}}),a.each(b,function(d,e){b[d]=a.isFunction(e)?e(c):e}),a.each(["minlength","maxlength"],function(){b[this]&&(b[this]=Number(b[this]))}),a.each(["rangelength","range"],function(){var c;b[this]&&(a.isArray(b[this])?b[this]=[Number(b[this][0]),Number(b[this][1])]:"string"==typeof b[this]&&(c=b[this].replace(/[\[\]]/g,"").split(/[\s,]+/),b[this]=[Number(c[0]),Number(c[1])]))}),a.validator.autoCreateRanges&&(null!=b.min&&null!=b.max&&(b.range=[b.min,b.max],delete b.min,delete b.max),null!=b.minlength&&null!=b.maxlength&&(b.rangelength=[b.minlength,b.maxlength],delete b.minlength,delete b.maxlength)),b},normalizeRule:function(b){if("string"==typeof b){var c={};a.each(b.split(/\s/),function(){c[this]=!0}),b=c}return b},addMethod:function(b,c,d){a.validator.methods[b]=c,a.validator.messages[b]=void 0!==d?d:a.validator.messages[b],c.length<3&&a.validator.addClassRules(b,a.validator.normalizeRule(b))},methods:{required:function(b,c,d){if(!this.depend(d,c))return"dependency-mismatch";if("select"===c.nodeName.toLowerCase()){var e=a(c).val();return e&&e.length>0}return this.checkable(c)?this.getLength(b,c)>0:b.length>0},email:function(a,b){return this.optional(b)||/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(a)},url:function(a,b){return this.optional(b)||/^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})).?)(?::\d{2,5})?(?:[/?#]\S*)?$/i.test(a)},date:function(a,b){return this.optional(b)||!/Invalid|NaN/.test(new Date(a).toString())},dateISO:function(a,b){return this.optional(b)||/^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(a)},number:function(a,b){return this.optional(b)||/^(?:-?\d+|-?\d{1,3}(?:,\d{3})+)?(?:\.\d+)?$/.test(a)},digits:function(a,b){return this.optional(b)||/^\d+$/.test(a)},creditcard:function(a,b){if(this.optional(b))return"dependency-mismatch";if(/[^0-9 \-]+/.test(a))return!1;var c,d,e=0,f=0,g=!1;if(a=a.replace(/\D/g,""),a.length<13||a.length>19)return!1;for(c=a.length-1;c>=0;c--)d=a.charAt(c),f=parseInt(d,10),g&&(f*=2)>9&&(f-=9),e+=f,g=!g;return e%10===0},minlength:function(b,c,d){var e=a.isArray(b)?b.length:this.getLength(b,c);return this.optional(c)||e>=d},maxlength:function(b,c,d){var e=a.isArray(b)?b.length:this.getLength(b,c);return this.optional(c)||d>=e},rangelength:function(b,c,d){var e=a.isArray(b)?b.length:this.getLength(b,c);return this.optional(c)||e>=d[0]&&e<=d[1]},min:function(a,b,c){return this.optional(b)||a>=c},max:function(a,b,c){return this.optional(b)||c>=a},range:function(a,b,c){return this.optional(b)||a>=c[0]&&a<=c[1]},equalTo:function(b,c,d){var e=a(d);return this.settings.onfocusout&&e.off(".validate-equalTo").on("blur.validate-equalTo",function(){a(c).valid()}),b===e.val()},remote:function(b,c,d){if(this.optional(c))return"dependency-mismatch";var e,f,g=this.previousValue(c);return this.settings.messages[c.name]||(this.settings.messages[c.name]={}),g.originalMessage=this.settings.messages[c.name].remote,this.settings.messages[c.name].remote=g.message,d="string"==typeof d&&{url:d}||d,g.old===b?g.valid:(g.old=b,e=this,this.startRequest(c),f={},f[c.name]=b,a.ajax(a.extend(!0,{mode:"abort",port:"validate"+c.name,dataType:"json",data:f,context:e.currentForm,success:function(d){var f,h,i,j=d===!0||"true"===d;e.settings.messages[c.name].remote=g.originalMessage,j?(i=e.formSubmitted,e.prepareElement(c),e.formSubmitted=i,e.successList.push(c),delete e.invalid[c.name],e.showErrors()):(f={},h=d||e.defaultMessage(c,"remote"),f[c.name]=g.message=a.isFunction(h)?h(b):h,e.invalid[c.name]=!0,e.showErrors(f)),g.valid=j,e.stopRequest(c,j)}},d)),"pending")}}});var b,c={};a.ajaxPrefilter?a.ajaxPrefilter(function(a,b,d){var e=a.port;"abort"===a.mode&&(c[e]&&c[e].abort(),c[e]=d)}):(b=a.ajax,a.ajax=function(d){var e=("mode"in d?d:a.ajaxSettings).mode,f=("port"in d?d:a.ajaxSettings).port;return"abort"===e?(c[f]&&c[f].abort(),c[f]=b.apply(this,arguments),c[f]):b.apply(this,arguments)})});;/**
@@ -46952,9 +46955,17 @@ $('#adduser-form').validate ({
  */
 
 var save_method; //for save method string
-var table;
+var table = '12454';
 $(document).ready(function() {
-    table = $('#tblDataAdmin').DataTable({
+    if($('#tblEmployee').is(':visible'))
+        table = set_table('#tblEmployee', 1);
+    else
+        table = set_table('#tblDataAdmin', 2);
+
+});
+
+function set_table(id, level) {
+    table = $(id).DataTable({
 
         "processing": true, //Feature control the processing indicator.
         "serverSide": true, //Feature control DataTables' server-side processing mode.
@@ -46962,7 +46973,8 @@ $(document).ready(function() {
         // Load data for the table's content from an Ajax source
         "ajax": {
             "url": "admin/ajax_list",
-            "type": "POST"
+            "type": "POST",
+            "data": {'level': level}
         },
 
         //Set column definition initialisation properties.
@@ -46974,45 +46986,25 @@ $(document).ready(function() {
         ],
 
     });
+    return table;
+}
 
-    table = $('#tblEmployee').DataTable({
-
-        "processing": true, //Feature control the processing indicator.
-        "serverSide": true, //Feature control DataTables' server-side processing mode.
-
-        // Load data for the table's content from an Ajax source
-        "ajax": {
-            "url": "employee/ajax_list",
-            "type": "POST"
-        },
-
-        //Set column definition initialisation properties.
-        "columnDefs": [
-            {
-                "targets": [ -1 ], //last column
-                "orderable": false, //set not orderable
-            },
-        ],
-
-    });
-});
-
-function add_person()
+function add()
 {
     save_method = 'add';
     $('#form')[0].reset(); // reset form on modals
     $('#modal_form').modal('show'); // show bootstrap modal
-    $('.modal-title').text('Add user'); // Set Title to Bootstrap modal title
+    $('.modal-title').text('Add admin'); // Set Title to Bootstrap modal title
 }
 
-function edit_person(id)
+function edit(id)
 {
     save_method = 'update';
     $('#form')[0].reset(); // reset form on modals
 
     //Ajax Load data from ajax
     $.ajax({
-        url : "admin/ajax_edit//" + id,
+        url : "admin/edit//" + id,
         type: "GET",
         dataType: "JSON",
         success: function(data)
@@ -47022,11 +47014,23 @@ function edit_person(id)
             $('[name="last_name"]').val(data.last_name);
             $('[name="email"]').val(data.email);
             $('[name="user_level"]').val(data.user_level);
+            $('[name="father_name"]').val(data.father_name);
+            $('[name="mother_name"]').val(data.mother_name);
+            $('[name="address"]').val(data.address);
+            $('[name="salary"]').val(data.salary);
+            $('[name="position"]').val(data.position);
+            $('[name="start_date"]').val(data.start_date);
+            $('[name="current_status"]').val(data.current_status);
+            $('[name="phone_no"]').val(data.phone_no);
+            $('[name="alternate_no"]').val(data.alternate_no);
+            $('[name="salutation"]').val(data.salutation);
+            $('[name="qualification"]').val(data.qualification);
+            $('[name="pan_no"]').val(data.pan_no);
             $('[name="password"]').val();
             $('[name="cpassword"]').val();
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
-            $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title
+            $('.modal-title').text('Edit admin'); // Set title to Bootstrap modal title
 
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -47044,14 +47048,14 @@ function reload_table()
 function save()
 {
     var url;
-    if(save_method == 'add')
-    {
-        url = "admin/ajax_add";
-    }
-    else
-    {
-        url = "admin/ajax_update";
-    }
+        if(save_method == 'add')
+        {
+            url = "admin/admin_add";
+        }
+        else
+        {
+            url = "admin/admin_update";
+        }
 
     // ajax adding data to database
     $.ajax({
@@ -47061,9 +47065,14 @@ function save()
         dataType: "JSON",
         success: function(data)
         {
-            //if success close modal and reload ajax table
-            $('#modal_form').modal('hide');
-            reload_table();
+            console.log(data.errors);
+            if(data.status === false) {
+                $('#error_massege').html(data.errors);
+            } else {
+                //if success close modal and reload ajax table
+                $('#modal_form').modal('hide');
+                reload_table();
+            }
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -47072,27 +47081,30 @@ function save()
     });
 }
 
-function delete_person(id)
+function delete_user(id)
 {
-    if(confirm('Are you sure delete this user?'))
-    {
-        // ajax delete data to database
-        $.ajax({
-            url : "admin/ajax_delete/"+id,
-            type: "POST",
-            dataType: "JSON",
-            success: function(data)
-            {
-                //if success reload ajax table
-                $('#modal_form').modal('hide');
-                reload_table();
-            },
-            error: function (jqXHR, textStatus, errorThrown)
-            {
-                alert('Error adding / update data');
-            }
-        });
-    }
+    bootbox.confirm("Are you sure delete this user?", function(result) {
+
+        if(result) {
+            // ajax delete data to database
+            $.ajax({
+                url : "admin/ajax_delete/"+id,
+                type: "POST",
+                dataType: "JSON",
+                success: function(data)
+                {
+                    if(data.status === false) {
+                        bootbox.alert(data.errors);
+                    }
+                    reload_table();
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    alert('Error adding / update data');
+                }
+            });
+        }
+    });
 }
 ;/**
 * List of function in this file:
@@ -47117,6 +47129,14 @@ $(function() {
 
 jQuery('.numbersOnly').keyup(function () { this.value = this.value.replace(/[^0-9\.]/g,'');	});
 
+if($('#number').is(':visible'))
+{
+	$('#number').onkeydown = function(n) {
+		if(n.keyCode == 69 || n.keyCode == 109 || n.keyCode == 107 || n.keyCode == 187 || n.keyCode == 107 || n.keyCode == 189|| n.keyCode == 46|| n.keyCode == 190|| n.keyCode == 110 ) {
+			return false;
+		}
+	};
+}
 
 /*
  * @function return adduser_validation()
@@ -47124,9 +47144,9 @@ jQuery('.numbersOnly').keyup(function () { this.value = this.value.replace(/[^0-
  * @return boolean
  *
  * this function is use for validation of form add user form
- * 
+ *
  */
-function adduser_validation()
+/*function adduser_validation()
 {
 	var reg 	   	= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var fname		= document.forms["myform"]["first_name"].value;
@@ -47141,7 +47161,7 @@ function adduser_validation()
 		$("#error_massege").show();
 		$("#error_massege").html('Please fill appropriate details...!!!');
 		document.forms["myform"]["first_name"].focus();
-		return false;	
+		return false;
 	}
 	else
 	{
@@ -47150,30 +47170,30 @@ function adduser_validation()
 			$("#error_massege").show();
 			$("#error_massege").html('First name is required...!!!');
 			document.forms["myform"]["first_name"].focus();
-			return false;	
+			return false;
 		}
 		if(lname.trim() === "")
 		{
-			$("#error_massege").show();	
+			$("#error_massege").show();
 			$("#error_massege").html('Last name is required...!!!');
 			document.forms["myform"]["last_name"].focus();
-			return false;	
+			return false;
 		}
 		if(email.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Email  is required...!!!');
 			document.forms["myform"]["email"].focus();
-			return false;	
+			return false;
 		}
 		else
 		{
-			if( ! email.match(reg)) 
+			if( ! email.match(reg))
 			{
-				$("#error_massege").show();	
+				$("#error_massege").show();
 				$("#error_massege").html('Email is not valid...!!!');
 				document.forms["myform"]["email"].focus();
-				return false;	
+				return false;
 			}
 		}
 		if(user_level.trim() === "")
@@ -47181,21 +47201,21 @@ function adduser_validation()
 			$("#error_massege").show();
 			$("#error_massege").html('User type is required...!!!');
 			document.forms["myform"]["user_level"].focus();
-			return false;	
+			return false;
 		}
 		if(password.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Password is required...!!!');
 			document.forms["myform"]["password"].focus();
-			return false;	
+			return false;
 		}
 		if(cpassword.trim() === "")
 		{
-			$("#error_massege").show();	
+			$("#error_massege").show();
 			$("#error_massege").html('Confirm password is required...!!!');
 			document.forms["myform"]["cpassword"].focus();
-			return false;	
+			return false;
 		}
 		else
 		{
@@ -47205,14 +47225,14 @@ function adduser_validation()
 			}
 			else
 			{
-				$("#error_massege").show();	
+				$("#error_massege").show();
 				$("#error_massege").html('Password does not match...!!!');
 				document.forms["myform"]["cpassword"].focus();
 				return false;
 			}
 		}
 	}
-}
+}*/
 
 /*
  * @function return updateuser()
@@ -47220,9 +47240,9 @@ function adduser_validation()
  * @return boolean
  *
  * this function is use for validation of form update form
- * 
+ *
  */
-function updateuser()
+/*function updateuser()
 {
 	var reg 	   	= /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 	var fname		= document.forms["updatefrm"]["first_name"].value;
@@ -47235,50 +47255,50 @@ function updateuser()
 		$("#error_massege").show();
 		$("#error_massege").html('Please fill appropriate details...!!!');
 		document.forms["updatefrm"]["first_name"].focus();
-		return false;	
+		return false;
 	}
 	else
 	{
 		if(fname.trim() === "")
 		{
-			$("#error_massege").show();	
+			$("#error_massege").show();
 			$("#error_massege").html('First name is required...!!!');
 			document.forms["updatefrm"]["first_name"].focus();
-			return false;	
+			return false;
 		}
 		if(lname.trim() === "")
 		{
-			$("#error_massege").show();	
+			$("#error_massege").show();
 			$("#error_massege").html('Last name is required...!!!');
 			document.forms["updatefrm"]["last_name"].focus();
-			return false;	
+			return false;
 		}
 		if(email.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Email  is required...!!!');
 			document.forms["updatefrm"]["email"].focus();
-			return false;	
+			return false;
 		}
 		else
 		{
-			if( ! email.match(reg)) 
+			if( ! email.match(reg))
 			{
 				$("#error_massege").show();
 				$("#error_massege").html('Email is not valid...!!!');
 				document.forms["updatefrm"]["email"].focus();
-				return false;	
+				return false;
 			}
 		}
 		if(user_level.trim() === "")
 		{
-			$("#error_massege").show();	
+			$("#error_massege").show();
 			$("#error_massege").html('User type is required...!!!');
 			document.forms["updatefrm"]["user_level"].focus();
-			return false;	
+			return false;
 		}
-	}	
-}
+	}
+}*/
 
 /*
  * @function return addemployee_validation()
@@ -47286,9 +47306,9 @@ function updateuser()
  * @return boolean
  *
  * this function is use for validation of form add employee
- * 
+ *
  */
-function addemployee_validation()
+/*function addemployee_validation()
 {
 	var numreg = /^(\d{1,3},)*(\d{1,3})+(\.\d{2})?$/;
 	var salary = document.forms["addemployee"]["salary"].value;
@@ -47301,7 +47321,7 @@ function addemployee_validation()
 		$("#error_massege").show();
 		$("#error_massege").html('Please fill appropriate details...!!!');
 		document.forms["addemployee"]["salary"].focus();
-		return false;	
+		return false;
 	}
 	else
 	{
@@ -47310,35 +47330,35 @@ function addemployee_validation()
 			$("#error_massege").show();
 			$("#error_massege").html('Please enter salary...!!!');
 			document.forms["addemployee"]["position"].focus();
-			return false;	
+			return false;
 		}
-		if( ! salary.match(numreg)) 
+		if( ! salary.match(numreg))
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Salary is not valid please enter numbers...!!!');
 			document.forms["addemployee"]["salary"].focus();
-			return false;	
+			return false;
 		}
 		if(position.trim() === "" )
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Please select position...!!!');
 			document.forms["addemployee"]["position"].focus();
-			return false;	
+			return false;
 		}
 		if(start_date.trim() === "" )
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Please select start date...!!!');
 			document.forms["addemployee"]["start_date"].focus();
-			return false;	
+			return false;
 		}
 		if(current_status.trim() === "")
 		{
 			$("#error_massege").show();
 			$("#error_massege").html('Please enter current job status...!!!');
 			document.forms["addemployee"]["current_status"].focus();
-			return false;	
+			return false;
 		}
 		else if(current_status == "Resigned")
 		{
@@ -47348,7 +47368,7 @@ function addemployee_validation()
 				$("#error_massege").show();
 				$("#error_massege").html('Please select end date...!!!');
 				document.forms["addemployee"]["end_date"].focus();
-				return false;	
+				return false;
 			}
 		}
 		else
@@ -47356,7 +47376,7 @@ function addemployee_validation()
 			return true;
 		}
 	}
-}
+}*/
 
 /*
  * @function return addEndDate()
@@ -47364,20 +47384,19 @@ function addemployee_validation()
  * @return
  *
  * this function is use for show end date if employee resigned
- * 
+ *
  */
 function addEndDate()
 {
- 		var current_status = $('#current_status').val();
- 		if(current_status == "Resigned")
- 		{
- 			$('#enddate').css('display','');
- 		}
- 		else
- 		{
- 			$('#enddate').css('display','none');
- 		}
- 		
+	var current_status = $('#current_status').val();
+	if(current_status == "Resigned")
+	{
+		$('#enddate').css('display','');
+	}
+	else
+	{
+		$('#enddate').css('display','none');
+	}
 }
 
 /*
@@ -47386,9 +47405,9 @@ function addEndDate()
  * @return boolean
  *
  * this function is use for validation of form update employee form
- * 
+ *
  */
-function updateemployee_validation()
+/*function updateemployee_validation()
 {
  		var numreg 			= /^(\d{1,3},)*(\d{1,3})+(\.\d{2})?$/;
  		var salary 			= document.forms["updateemployee"]["salary"].value;
@@ -47401,61 +47420,61 @@ function updateemployee_validation()
  			$("#error_massege").show();
  			$("#error_massege").html('Please fill appropriate details...!!!');
  			document.forms["updateemployee"]["salary"].focus();
- 			return false;	
+ 			return false;
  		}
  		else
  		{
  			if(salary.trim() === "" )
  			{
- 				$("#error_massege").show();	
+ 				$("#error_massege").show();
  				$("#error_massege").html('Please enter salary...!!!');
  				document.forms["updateemployee"]["position"].focus();
- 				return false;	
+ 				return false;
  			}
- 			if( ! salary.match(numreg)) 
+ 			if( ! salary.match(numreg))
  			{
  				$("#error_massege").show();
  				$("#error_massege").html('Salary is not valid please enter numbers...!!!');
  				document.forms["updateemployee"]["salary"].focus();
- 				return false;	
+ 				return false;
  			}
  			if(position.trim() === "" )
  			{
  				$("#error_massege").show();
  				$("#error_massege").html('Please select position...!!!');
  				document.forms["updateemployee"]["position"].focus();
- 				return false;	
+ 				return false;
  			}
  			if(start_date.trim() === "" )
  			{
  				$("#error_massege").show();
  				$("#error_massege").html('Please select start date...!!!');
  				document.forms["updateemployee"]["start_date"].focus();
- 				return false;	
+ 				return false;
  			}
  			if(current_status.trim() === "")
  			{
- 				$("#error_massege").show();	
+ 				$("#error_massege").show();
  				$("#error_massege").html('Please enter current job status...!!!');
  				document.forms["updateemployee"]["current_status"].focus();
- 				return false;	
+ 				return false;
  			}
  			if(current_status.trim() == "Resigned")
  			{
  				var end_date = document.forms["updateemployee"]["end_date"].value;
  				if(end_date.trim() === "" || end_date.trim() == '0000-00-00')
  				{
- 					$("#error_massege").show();	
+ 					$("#error_massege").show();
  					$("#error_massege").html('Please select end date...!!!');
  					document.forms["updateemployee"]["end_date"].focus();
- 					return false;	
+ 					return false;
  				}
  				if(start_date.trin() > end_date.trim())
  				{
  					$("#error_massege").show();
  					$("#error_massege").html('Please select valid end date...!!!');
  					document.forms["updateemployee"]["end_date"].focus();
- 					return false;	
+ 					return false;
  				}
  				else
  				{
@@ -47467,9 +47486,9 @@ function updateemployee_validation()
  				return true;
  			}
  		}
-}
+}*/
 
-	function profile_validation() 
+	function profile_validation()
 	{
 		//alert("hello");
 		var address = $('#address').val().trim();
@@ -47509,7 +47528,7 @@ function updateemployee_validation()
 			$('#mobile').focus();
 			return false;
 		}
-		if(other != "")
+		if(other !== "")
 		{
 			if(isNaN(other))
 			{
@@ -47520,8 +47539,9 @@ function updateemployee_validation()
 		}
 	}
 
-	function change_password_validation() 
+	function change_password_validation()
 	{
+
 		var oldpsaaword = document.forms["change_password"]["oldpassword"].value;
 		var newpsaaword = document.forms["change_password"]["newpassword"].value;
 		var cpsaaword = document.forms["change_password"]["cpassword"].value;
@@ -47634,11 +47654,11 @@ function updateemployee_validation()
 			{
 				var working_days 	= $('#working_days'+i+'').val();
 				var base_salary 	= $('#base_salary'+i+'').val();
-				var bonus 				= $('#bonus'+i+'').val();
-				var pt 						= $('#pt'+i+'').val();
-				var esi 					= $('#esi'+i+'').val();
-				var tds 					= $('#tds'+i+'').val();
-				var total 				= $('#total'+i+'').val();
+				var bonus 			= $('#bonus'+i+'').val();
+				var pt 				= $('#pt'+i+'').val();
+				var esi 			= $('#esi'+i+'').val();
+				var tds 			= $('#tds'+i+'').val();
+				var total 			= $('#total'+i+'').val();
 
 				if(isNaN(working_days.trim()) == true || working_days.trim() == "" || working_days.trim() <= 0)
 					{

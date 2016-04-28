@@ -8,7 +8,7 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="add-button col-sm-12">
-			<button class="btn btn-success" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Add new</button>
+			<button class="btn btn-success" onclick="add()"><i class="glyphicon glyphicon-plus"></i> Add new</button>
 		</div>
 	</div>
 	<table id="tblDataAdmin" class="table-striped table-hover">
@@ -29,11 +29,17 @@
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h3 class="modal-title">Add new user</h3>
+						<h3 class="modal-title">Add new admin</h3>
 					</div>
 					<div class="modal-body form">
 						<form action="#" id="form" class="form-horizontal">
-							<input type="hidden" value="" name="id"/>
+							<input type="hidden" value="" name="id" />
+							<input type="hidden" value="2" name="level" />
+							<div class="form-group">
+								<div class="col-md-offset-3 col-md-9">
+									<div style="color:red;" id="error_massege"></div>
+								</div>
+							</div>
 							<div class="form-body">
 								<div class="form-group">
 									<label class="control-label col-md-3">First Name</label>
@@ -51,35 +57,6 @@
 									<label class="control-label col-md-3">Email</label>
 									<div class="col-md-9">
 										<input type="text" name="email" class="form-control" placeholder="Enter user email">
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-md-3">User type</label>
-									<div class="col-md-9">
-										<select name="user_level" class="form-control">
-											<?php
-											$select_e = "";
-											$select_a = "";
-											if(isset($type))
-											{
-												switch ($type)
-												{
-													case '1':
-														$select_e = "selected";
-														break;
-													case '2':
-														$select_a = "selected";
-														break;
-												}
-											}
-											else
-											{
-												echo "<option value='' >-- Select one --</option>";
-											}
-											?>
-											<option <?php echo $select_e; ?> value="1">Employee</option>
-											<option <?php echo $select_a; ?> value="2">Admin</option>
-										</select>
 									</div>
 								</div>
 								<div class="form-group">

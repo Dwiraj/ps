@@ -6,12 +6,12 @@
 		* @Class User
 	 	*
 		* @package		CodeIgniter
-	 	* @subpackage	Controller 
-	 	* @category		
+	 	* @subpackage	Controller
+	 	* @category
 	 	* @author		Dwiraj Chauhan <dwiraj.k.chauhan25@gmail.com>
 	 	* @link			localhost
 		*/
-	class User extends MY_Controller 
+	class User extends MY_Controller
 		{
 			public function __construct()
 			{
@@ -27,10 +27,10 @@
 		 */
 			public function index()
 			{
-				// check session sets or not 
+				// check session sets or not
 				if($this -> session -> userdata('logged_in'))
 				{
-					redirect('user/welcome');	
+					redirect('user/welcome');
 				}
 				$this -> login();
 			}
@@ -44,28 +44,28 @@
 		 */
 			public function login()
 			{
-				// retrieve cookie 
+				// retrieve cookie
 				$uid = $this->input->cookie('login_email',TRUE);
-		 		if (isset($uid)) 
+		 		if (isset($uid))
 		 		{
-		 			// get data of user 
+		 			// get data of user
 		 			$value = $this -> Users -> update_user($uid);
 		 			// set session from cookie
 		  			$this -> session -> set_userdata('logged_in',$value);
 		  			// update last login of user
 					$this -> Users -> last_login($uid);
 					redirect('user/welcome');
-		 		}	
+		 		}
 				// get data from login form with post method
-				$parameters = array(	
+				$parameters = array(
 									'email' 	=> $this -> input -> post('email'),
 									'password' 	=> $this -> input -> post('password')
 									);
-		
+
 				$parameters['title'] = "User login";
 				// Set form validation rules for each field
 				$result = $this -> check_validation('login');
-		
+
 				// check for validation successful or not
 				if($result == true)
 				{
@@ -89,10 +89,10 @@
 											'user_level'=> $row -> user_level,
 											'last_login'=> $last_login
 											);
-						
+
 						// set cookie if user checked remember me check box
 						$remember = $this -> input -> post('rememberme');
-						if ($remember !='') 
+						if ($remember !='')
 						{
 							// array of user detail to store in cookie
 							$cookie = array(
@@ -102,11 +102,11 @@
 											'path'  => '/'
 											);
 							// set cookie with $cookie array
-							$this->input->set_cookie($cookie); 
+							$this->input->set_cookie($cookie);
 						}
-						// set session of user login 
+						// set session of user login
 						$this -> session -> set_userdata('logged_in',$sess_array);
-	
+
 						// update last login of user
 						$this -> Users -> last_login($row -> id);
 						redirect('user/welcome');
@@ -122,7 +122,7 @@
 					$this->load_view('user/login', $parameters);
 				}
 			}
-		
+
 
 		/**
 		 * @function welcome
@@ -133,11 +133,11 @@
 		 */
 			public function welcome()
 			{
-				
-				$test = $this -> session -> userdata['logged_in']['user_level'];
-		
+
+				$role = $this -> session -> userdata['logged_in']['user_level'];
+
 				// condition for check user login or admin
-				if($test == 1) 
+				if($role == 1) // check if user is employee
 				{
 					if($this -> check_login() != 1)
 					{
@@ -148,8 +148,8 @@
 						$parameters['title'] = "User user";
 						$this->load_view('user/welcome', $parameters);
 					}
-				} 
-				else 
+				}
+				else
 				{
 					if($this -> check_login() != 2)
 					{
@@ -175,7 +175,7 @@
 				$id = $this -> session -> userdata['logged_in']['id'];
 				$parameters['query'] 	= $this -> Users -> update_user($id);
 				$parameters['query1']	= $this -> Employees -> update_user($id);
-				if (empty($parameters['query1'])) 
+				if (empty($parameters['query1']))
 				{
 					$parameters['query1'] = "Not Set";
 				}
@@ -250,7 +250,7 @@
 				$id = $this -> session -> userdata['logged_in']['id'];
 				if($_SERVER["REQUEST_METHOD"] == "POST")
 				{
-					$parameters = array(												
+					$parameters = array(
 										'employee_id'		=> $id,
 										'address'			=> $this -> input -> post('address'),
 										'dob'				=> $this -> input -> post('dob'),
@@ -289,7 +289,7 @@
 				$this -> form_validation -> set_rules('newpassword', 'new password', 'trim|required|matches[cpassword]');
 				$this -> form_validation -> set_rules('cpassword', 'confirm password', 'trim|required');
 
-				if ($this->form_validation->run() == true) 
+				if ($this->form_validation->run() == true)
 				{
 					$id = $this -> session -> userdata['logged_in']['id'];
 					$query 	= $this -> Users -> update_user($id);
@@ -372,6 +372,6 @@
 				delete_cookie("login_email");
 				redirect('user/login');
 			}
-			
+
 	}
 ?>

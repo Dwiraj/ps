@@ -11,7 +11,7 @@
 	 	* @author		Dwiraj Chauhan <dwiraj.k.chauhan25@gmail.com>
 	 	* @link			localhost
 		*/
-		class Employee extends MY_Controller 
+		class Employee extends MY_Controller
 		{
 			public function __construct()
 			{
@@ -31,7 +31,7 @@
 			 */
 			public function index()
 			{
-				$parameters['query'] = $this -> Employees -> get_data();
+				$parameters['query'] = $this -> Employees -> get_employees();
 				$parameters['title'] = "View all employee";
 				$this->load_view('employee/viewemployee', $parameters);
 			}
@@ -62,7 +62,7 @@
 
 					//add html for action
 					$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_person('."'".$employee->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                  	<a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$employee->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+                  			  <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$employee->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
 
 					$data[] = $row;
 				}
@@ -107,8 +107,8 @@
 			 * this function show add employee detail form and insert into database
 			 */
 			public function addemployee()
-			{ 
-				$parameters = array(												
+			{
+				$parameters = array(
 									'employee_id' 	 	=> $this -> input -> post('uid'),
 									'salutation' 		=> $this -> input -> post('salutation'),
 									'father_name' 	 	=> $this -> input -> post('father_name'),
@@ -141,10 +141,10 @@
 				{
 					$parameters['employee_id'] = $this -> input -> get('id');
 				}
-		
-				// function call for checking validation true or false 
+
+				// function call for checking validation true or false
 				$result = $this -> check_validation('employee_detail');
-		
+
 				if($result != false)
 				{
 					// condition for end date is set or not
@@ -166,7 +166,7 @@
 					else
 					{
 						$parameters = $this -> unset_array($parameters);
-						// insert if user current status is working 
+						// insert if user current status is working
 						$this -> Employees -> addemployee($parameters);
 						redirect('employee');
 					}
@@ -191,7 +191,7 @@
 				if($data['searchkeyword'] == '')
 				{
 					// if search keyword is empty than show all users
-					$parameters['query'] = $this -> Employees -> get_data();
+					$parameters['query'] = $this -> Employees -> get_employees();
 				}
 				else
 				{
@@ -225,7 +225,7 @@
 				if($data['searchtype'] == '')
 				{
 					// if search keyword is empty than show all users
-					$parameters['query'] = $this -> Employees -> get_data();
+					$parameters['query'] = $this -> Employees -> get_employees();
 				}
 				else
 				{
@@ -280,20 +280,20 @@
 				}
 				$dob = $this -> input -> post('dob');
 				// setting end date if user current status is resigned
-				
+
 				if(trim($dob) != "" || trim($dob) != "0000-00-00")
 				{
 					$parameters['dob'] = trim($dob);
 				}
-				// function call for checking validation true or false 
+				// function call for checking validation true or false
 				$result = $this -> check_validation('employee_detail');
-		
+
 				if($result != false)
 				{
 					// checking for end date is set or not
 					if($parameters['end_date'] != 0)
 					{
-						// checking with end date is proper or not 
+						// checking with end date is proper or not
 						if($parameters['end_date'] < $parameters['start_date'] || $parameters['end_date'] == '0000-00-00')
 						{
 							// set error message if end date is not valid

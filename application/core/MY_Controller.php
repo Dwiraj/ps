@@ -6,20 +6,20 @@
 	 	*
 		* @package		CodeIgniter
 	 	* @subpackage	Controller
-	 	* @category		
+	 	* @category
 	 	* @author		Dwiraj Chauhan
 	 	* @link			localhost
 		*/
-		class MY_Controller extends CI_Controller 
+		class MY_Controller extends CI_Controller
 		{
 			public function __construct()
 			{
 				parent::__construct();
-				// load all model used 
+				// load all model used
 				$this -> load -> model('Users');
 				$this -> load -> model('Employees');
 				$this -> load -> model('Salary_registers');
-				// load library of javascript 
+				// load library of javascript
 				$this -> load -> library('javascript');
 				// load helper
 				$this -> load -> helper('form');
@@ -37,7 +37,7 @@
 			public function check_login()
 			{
 				// if user not loging or session is not set
-				if (!$this -> session -> userdata('logged_in')) 
+				if (!$this -> session -> userdata('logged_in'))
 				{
 					redirect('user/login');
 				}
@@ -51,7 +51,7 @@
 			 * @param array $parameters
 			 * @return void
 			 *
-			 * this function for show view filess
+			 * this function for show view filess with header and footer
 			 */
 			public function load_view($view_file, $parameters)
 			{
@@ -102,14 +102,13 @@
 					$this -> form_validation -> set_rules('first_name', 'first name', 'trim|required|max_length[12]');
 					$this -> form_validation -> set_rules('last_name', 'last name', 'trim|required|max_length[12]');
 					$this -> form_validation -> set_rules('email','email', 'trim|required|valid_email');
-					$this -> form_validation -> set_rules('user_level', 'user type', 'trim|required');
 					if($page == 'add')
 					{
 						$this -> form_validation -> set_rules('password', 'password', 'trim|required|matches[cpassword]');
 						$this -> form_validation -> set_rules('cpassword', 'confirm password', 'trim|required');
 					}
 				}
-		
+
 				if($this->form_validation->run() == false)
 				{
 					return false;
@@ -158,7 +157,7 @@
 			 */
 			public function unset_array($parameters)
 			{
-				foreach ($parameters as $key => $value) 
+				foreach ($parameters as $key => $value)
 				{
 					if($value == "")
 					{
@@ -167,6 +166,6 @@
 				}
 				return $parameters;
 			}
-	
+
 		}
 	?>

@@ -30,7 +30,7 @@
 			*
 			* this function is for show user list to admin only
 			*/
-			public function get_data()
+			public function get_employees()
 			{
 				$this -> db -> select('*');
 				$this -> db -> from('employees');
@@ -192,50 +192,45 @@
 
 			private function _get_datatables_query()
 			{
-				$query = "SELECT * FROM `employees` JOIN `users` ON `employees`.`employee_id` = `users`.`id` WHERE `user_status` = 'Active' AND `user_level` = '1'";
+				$this->db->from($this->table);
+				$this -> db -> join('users', 'employees.employee_id = users.id');
+				$this -> db -> where('user_status', 'Active');
+				$this -> db -> where('user_level', '1');
+
 				$i = 0;
-				if($_POST['search']['value'])
-					$query .= "AND (";
 				foreach ($this->column as $item)
 				{
-					if($_POST['search']['value']){
-						$query .= "`$item` like '%".$_POST['search']['value']."%'";
-						if($i < (count($this->column)-1) )
-							$query .= " OR ";
-					}
+					if($_POST['search']['value'])
+						($i===0) ? $this->db->like($item, $_POST['search']['value']) : $this->db->or_like($item, $_POST['search']['value']);
 					$column[$i] = $item;
 					$i++;
 				}
 
-				if($_POST['search']['value'])
-					$query .= ")";
-
 				if(isset($_POST['order']))
 				{
-					$query .= " ORDER BY ". $column[$_POST['order']['0']['column']] ." ". $_POST['order']['0']['dir'];
+					$this->db->order_by($column[$_POST['order']['0']['column']], $_POST['order']['0']['dir']);
 				}
 				else if(isset($this->order))
 				{
 					$order = $this->order;
-					$query .= " ORDER BY ". key($order) ." ". $order[key($order)];
+					$this->db->order_by(key($order), $order[key($order)]);
 				}
-
-				if($_POST['length'] != -1)
-					$query .= " LIMIT ". $_POST['start'] .", ". $_POST['length'];
-
-				return $this->db->query($query);
 
 			}
 
 			function get_datatables()
 			{
-				$query = $this->_get_datatables_query();
+				$this->_get_datatables_query();
+				if($_POST['length'] != -1)
+					$this->db->limit($_POST['length'], $_POST['start']);
+				$query = $this->db->get();
 				return $query->result();
 			}
 
 			function count_filtered()
 			{
-				$query = $this->_get_datatables_query();
+				$this->_get_datatables_query();
+				$query = $this->db->get();
 				return $query->num_rows();
 			}
 

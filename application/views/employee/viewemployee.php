@@ -2,6 +2,11 @@
   	<div class="col-sm-12">
   		<p align="center"><span class="h2">Employee list</span></p><br/>
   	</div>
+	<div class="row">
+		<div class="add-button col-sm-12">
+			<button class="btn btn-success" onclick="add()"><i class="glyphicon glyphicon-plus"></i> Add new</button>
+		</div>
+	</div>
 	<!--<div id="search">
 		<p align="center"><button id="searchbtn" class="button-btn">Search</button></p>
 		<div id="subsearch" style="display:none; align:center;">
@@ -146,7 +151,180 @@
 					*/?>
 			</tbody>-->
 		</table>
-         <!-- Modal -->
+
+		<div class="row">
+			<div class="modal fade" id="modal_form" role="dialog">
+				<div class="modal-dialog modal-lg">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h3 class="modal-title">Add new admin</h3>
+						</div>
+						<div class="modal-body form">
+							<form action="#" id="form" class="form-horizontal">
+								<input type="hidden" value="" name="id"/>
+								<input type="hidden" value="1" name="level"/>
+								<div class="form-body">
+									<div class="form-group">
+										<div class="col-md-offset-3 col-md-9">
+											<div style="color:red;" id="error_massege"></div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Name</label>
+										<div class="col-md-9">
+											<!--<input type="text" name="salutation" class="form-control" placeholder="Mr / Miss / Mrs">-->
+											<div class="col-md-2" style="padding-left: 0;z">
+											<select name="salutation" class="form-control col-md-2">
+												<option value="Mr">Mr</option>
+												<option value="Miss">Miss</option>
+												<option value="Mrs">Mrs</option>
+											</select>
+											</div>
+											<div class="col-md-5">
+												<input type="text" name="first_name" class="form-control" placeholder="First name">
+											</div>
+											<div class="col-md-5">
+												<input type="text" name="last_name" class="form-control" placeholder="Last name">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Email</label>
+										<div class="col-md-9">
+											<input type="text" name="email" class="form-control" placeholder="Enter email">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Father Name</label>
+										<div class="col-md-9">
+											<input type="text" name="father_name" class="form-control" placeholder="Enter father name">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Mother Name</label>
+										<div class="col-md-9">
+											<input type="text" name="mother_name" class="form-control" placeholder="Enter mother name">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Salary</label>
+										<div class="col-md-9">
+											<input type="number" min="0" id="number" name="salary" class="form-control" placeholder="salary">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Position</label>
+										<div class="col-md-9">
+											<select name="position" class="form-control">
+												<option value="" >Select One</option>
+												<option value="Accountant">Accountant</option>
+												<option value="Business Development Executive">Business Development Executive</option>
+												<option value="HR Executive">HR Executive</option>
+												<option value="HR Manager">HR Manager</option>
+												<option value="Mobile Developer">Mobile Developer</option>
+												<option value="Project Manager">Project Manager</option>
+												<option value="Receptionist">Receptionist</option>
+												<option value="Senior Web Developer">Senior Web Developer</option>
+												<option value="Software Engineer">Software Engineer</option>
+												<option value="Senior UI Developer">Senior UI Developer</option>
+												<option value="SEO Executive">SEO Executive</option>
+												<option value="Trainee">Trainee</option>
+												<option value="UI Developer">UI Developer</option>
+												<option value="Web Developer">Web Developer</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Start date</label>
+										<div class="col-md-9">
+											<input type="date" name="start_date" class="form-control" >
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Current status</label>
+										<div class="col-md-9">
+											<select name="current_status" class="form-control">
+												<option value="">Select one</option>
+												<option value="working">Working</option>
+												<option value="resigned">Resigned</option>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Phone no</label>
+										<div class="col-md-9">
+											<input type="text" name="phone_no" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Alternate no</label>
+										<div class="col-md-9">
+											<input type="text" name="alternate_no" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Pan no</label>
+										<div class="col-md-9">
+											<input type="text" name="pan_no" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Address</label>
+										<div class="col-md-9">
+											<textarea name="address" class="form-control" spellcheck="true" rows="7"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Bank Account no</label>
+										<div class="col-md-9">
+											<textarea name="bank_account_no" class="form-control" spellcheck="true" rows="7"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Qualification</label>
+										<div class="col-md-9">
+											<textarea name="qualification" class="form-control" spellcheck="true" rows="7"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Comment</label>
+										<div class="col-md-9">
+											<textarea name="comment" class="form-control" spellcheck="true" rows="7"></textarea>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Photo</label>
+										<div class="col-md-9">
+											<input type="file" name="profile_picture" class="form-control">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Password</label>
+										<div class="col-md-9">
+											<input type="password" name="password" id="password" class="form-control" value="" placeholder="Enter user password">
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="control-label col-md-3">Confirm cassword</label>
+										<div class="col-md-9">
+											<input type="password" name="cpassword" class="form-control" value="" placeholder="Enter confirm password">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="btnSave" onclick="save()" class="btn btn-primary">Save</button>
+							<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+						</div>
+					</div><!-- /.modal-content -->
+				</div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->
+			<!-- End Bootstrap modal -->
+		</div>
+
+         <!-- Increment Modal -->
          <div class="modal fade" id="myModal" role="dialog">
           <div class="modal-dialog">
 
@@ -160,13 +338,13 @@
                 <form action="" enctype="multipart/form-data" method="post" accept-charset="utf-8">
                   <div class="form-group">
 					<label class="control-label col-sm-3" for="address">Employee name:</label>
-					<div class="col-sm-8"> 
+					<div class="col-sm-8">
 						<pre class="plain-text"></pre>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3" for="address">Amount</label>
-					<div class="col-sm-8"> 
+					<div class="col-sm-8">
 						<pre class="plain-text"></pre>
 					</div>
 				</div>

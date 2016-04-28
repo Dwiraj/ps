@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] 			= 'User';
 $route['404_override'] 					= '';
 $route['salary-register-list'] 			= '/salary_register';
-$route['create-new-salary-register'] 	= '/salary_register/createregisterlist';
+$route['new-salary-register'] 	        = '/salary_register/createregisterlist';
 $route['add-new-salary-register'] 		= '/salary_register/add_salary_register';
 $route['add-new-user'] 					= '/admin/adduser';
 $route['admin-list'] 					= '/admin/viewadmin';

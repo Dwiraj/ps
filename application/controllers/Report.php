@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 */
 		public function employee_salary_record()
 		{
-			$parameters['query'] 	= $this -> Employees -> get_data();
+			$parameters['query'] 	= $this -> Employees -> get_employees();
 			$parameters['title'] 	= "Employee salary record";
 			$this -> load_view('report/employee_salary_record', $parameters);
 		}

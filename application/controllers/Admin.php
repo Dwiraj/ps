@@ -11,7 +11,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  	* @author		Dwiraj Chauhan <dwiraj.k.chauhan25@gmail.com>
  	* @link			localhost
 	*/
- 	class Admin extends MY_Controller 
+ 	class Admin extends MY_Controller
  	{
  		public function __construct()
  		{
@@ -110,65 +110,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		 */
 		public function viewadmin()
 		{
-			$parameters['query'] = $this -> Users -> get_data();
+			$parameters['query'] = $this -> Users -> get_admins();
 			$parameters['title'] = "View all admin";
 			$this -> load_view('admin/manageuser', $parameters);
-		}
-
-		public function get_admin_list()
-		{
-			// DB table to use
-			$table = 'users';
-
-			// Table's primary key
-			$primaryKey = 'id';
-
-			// Array of database columns which should be read and sent back to DataTables.
-			// The `db` parameter represents the column name in the database, while the `dt`
-			// parameter represents the DataTables column identifier. In this case simple
-			// indexes
-			$columns = array(
-				array( 'db' => 'id', 'dt' => 0 ),
-				array( 'db' => 'first_name', 'dt' => 1 ),
-				array( 'db' => 'last_name',  'dt' => 2 ),
-				array( 'db' => 'email',   'dt' => 3 ),
-				array(
-					'db' => 'last_login',
-					'dt' => 4,
-					'formatter' => function( $d, $row ) {
-						return date( 'jS M y', strtotime($d));
-					}
-				),
-				array(
-					'db' => 'last_login',
-					'dt' => 5,
-					'formatter' => function( $d, $row ) {
-						$a = '<a href="admin/update/'. $row[0] .'"><button class="btn btn-info">Edit</button></a>
-							  <a href="admin/deleteuser/'.$row[0].'"><button class="btn btn-danger btn-red">Delete</but		ton></a>';
-						return $a;
-					}
-				)
-			);
-
-			// SQL server connection information
-			$sql_details = array(
-				'user' => 'root',
-				'pass' => '',
-				'db'   => 'ps',
-				'host' => 'localhost'
-			);
-
-
-			/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-             * If you just want to use the basic configuration for DataTables with PHP
-             * server-side, there is no need to edit below this line.
-             */
-
-			include(APPPATH.'third_party/SSP.php' );
-
-			echo json_encode(
-				SSP::simple( $_GET, $sql_details, $table, $primaryKey, $columns )
-			);
 		}
 
 		/**
@@ -240,76 +184,136 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		/**********************************************************************************/
 		public function ajax_list()
 		{
-			$list = $this->Users->get_datatables();
+			$list = $this->Users->get_datatables($_POST['level']);
 			$data = array();
 			$no = $_POST['start'];
-			foreach ($list as $user) {
-				$no++;
-				$row = array();
-				$row[] = $user->id;
-				$row[] = $user->first_name;
-				$row[] = $user->last_name;
-				$row[] = $user->email;
-				$row[] = $user->last_login ? date('jS F Y, g:i a', strtotime($user->last_login)) : "Not Login yet";
+			if($_POST['level'] == 2) {
+				foreach ($list as $user) {
+					$no++;
+					$row = array();
+					$row[] = $user->id;
+					$row[] = $user->first_name;
+					$row[] = $user->last_name;
+					$row[] = $user->email;
+					$row[] = $user->last_login ? date('jS F Y, g:i a', strtotime($user->last_login)) : "Not Login yet";
 
-				//add html for action
-				$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit_person('."'".$user->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
-                  <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_person('."'".$user->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+					//add html for action
+					$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit('."'".$user->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+					          <a class="btn btn-sm btn-danger" href="javascript:void()" title="Delete" onclick="delete_user('."'".$user->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
 
-				$data[] = $row;
+					$data[] = $row;
+				}
+			} else {
+				foreach ($list as $employee) {
+					$no++;
+					$row = array();
+					$row[] = $employee->id;
+					$row[] = $employee->first_name." ".$employee->last_name;
+					$row[] = $employee->email;
+					$row[] = $employee->position;
+					$row[] = $employee->start_date;
+					$row[] = $employee->current_status;
+					$row[] = $employee->end_date;
+					$row[] = $employee->last_login ? date('jS F Y, g:i a', strtotime($employee->last_login)) : "Not Login yet";
+
+					//add html for action
+					$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void()" title="Edit" onclick="edit('."'".$employee->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                  			  <a class="btn btn-sm btn-danger" href="javascript:void()" title="Hapus" onclick="delete_user('."'".$employee->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+
+					$data[] = $row;
+				}
 			}
 
 			$output = array(
 				"draw" => $_POST['draw'],
-				"recordsTotal" => $this->Users->count_all(),
-				"recordsFiltered" => $this->Users->count_filtered(),
+				"recordsTotal" => $this->Users->count_all($_POST['level']),
+				"recordsFiltered" => $this->Users->count_filtered($_POST['level']),
 				"data" => $data,
 			);
 			//output to json format
 			echo json_encode($output);
 		}
 
-		public function ajax_edit($id)
+		public function admin_add()
+		{
+			$parameters = $this->parameters();
+			if ($this->check_validation("add")) {
+				if ($this->Users->save($parameters))
+					echo json_encode(array("status" => TRUE));
+				else
+					echo json_encode(array("status" => FALSE, 'errors' => 'sorry something went wrong, user can not insert at this time'));
+			} else {
+				echo json_encode(array("status" => FALSE, 'errors' => validation_errors()));
+			}
+		}
+
+		public function edit($id)
 		{
 			$data = $this->Users->get_by_id($id);
 			echo json_encode($data);
 		}
 
-		public function ajax_add()
+		public function admin_update()
 		{
-			$parameters = array(
-				'first_name'  	=> $this -> input -> post('first_name'),
-				'last_name' 	=> $this -> input -> post('last_name'),
-				'email' 		=> $this -> input -> post('email'),
-				'password' 		=> md5($this -> input -> post('password')),
-				'user_level' 	=> $this -> input -> post('user_level')
-			);
-			$insert = $this->Users->save($parameters);
-			echo json_encode(array("status" => TRUE));
-		}
-
-		public function ajax_update()
-		{
-
-			$parameters = array(
-				'first_name'  	=> $this -> input -> post('first_name'),
-				'last_name' 	=> $this -> input -> post('last_name'),
-				'email' 		=> $this -> input -> post('email'),
-				'user_level' 	=> $this -> input -> post('user_level')
-			);
+			$parameters = $this->parameters();
+			$page = "update";
 			if(!empty($this->input->post('password')) && $this->input->post('password') == $this->input->post('cpassword'))
 			{
+				$page = "add";
 				$parameters['password'] = md5($this -> input -> post('password'));
 			}
-			$this->Users->update(array('id' => $this->input->post('id')), $parameters);
-			echo json_encode(array("status" => TRUE));
+			if ($this->check_validation($page)) {
+				if ($this->Users->update(array('id' => $this->input->post('id')), $parameters))
+					echo json_encode(array("status" => TRUE));
+				else
+					echo json_encode(array("status" => FALSE, 'errors' => 'sorry something went wrong, user can not update at this time'));
+			} else {
+				echo json_encode(array("status" => FALSE, 'errors' => validation_errors()));
+			}
 		}
 
 		public function ajax_delete($id)
 		{
-			$this->Users->delete_by_id($id);
-			echo json_encode(array("status" => TRUE));
+			if($this->Users->delete_by_id($id))
+				echo json_encode(array("status" => TRUE));
+			else
+				echo json_encode(array("status" => FALSE, 'errors' => 'sorry something went wrong, user can not deleted at this time'));
+
 		}
 
+		public  function parameters() {
+			if($this -> input -> post('level') == 2) {
+				$parameters = array(
+					'first_name' 		=> $this->input->post('first_name'),
+					'last_name' 		=> $this->input->post('last_name'),
+					'email' 			=> $this->input->post('email'),
+					'user_level' 		=> 2
+				);
+			} else {
+
+				$parameters = array(
+					'first_name' 		=> $this->input->post('first_name'),
+					'last_name' 		=> $this->input->post('last_name'),
+					'email' 			=> $this->input->post('email'),
+					'user_level' 		=> 1,
+					'salutation' 		=> $this -> input -> post('salutation'),
+					'father_name' 	 	=> $this -> input -> post('father_name'),
+					'mother_name' 	 	=> $this -> input -> post('mother_name'),
+					'salary' 			=> $this -> input -> post('salary'),
+					'position'			=> $this -> input -> post('position'),
+					'start_date' 		=> $this -> input -> post('start_date'),
+					'current_status' 	=> $this -> input -> post('current_status'),
+					'address'			=> $this -> input -> post('address'),
+					'phone_no'			=> $this -> input -> post('phone_no'),
+					'alternate_no'	 	=> $this -> input -> post('alternate_no'),
+					'pan_no'			=> $this -> input -> post('pan_no'),
+					'bank_account_no' 	=> $this -> input -> post('bank_account_no'),
+					'qualification'  	=> $this -> input -> post('qualification'),
+					'comment' 			=> $this -> input -> post('comment'),
+					'profile_picture' 	=> "logo.ico",
+				);
+			}
+			return $parameters;
+		}
 	}
 ?>

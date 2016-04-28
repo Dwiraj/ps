@@ -82,11 +82,11 @@
 			{
 				var working_days 	= $('#working_days'+i+'').val();
 				var base_salary 	= $('#base_salary'+i+'').val();
-				var bonus 				= $('#bonus'+i+'').val();
-				var pt 						= $('#pt'+i+'').val();
-				var esi 					= $('#esi'+i+'').val();
-				var tds 					= $('#tds'+i+'').val();
-				var total 				= $('#total'+i+'').val();
+				var bonus 			= $('#bonus'+i+'').val();
+				var pt 				= $('#pt'+i+'').val();
+				var esi 			= $('#esi'+i+'').val();
+				var tds 			= $('#tds'+i+'').val();
+				var total 			= $('#total'+i+'').val();
 
 				if(isNaN(working_days.trim()) == true || working_days.trim() == "" || working_days.trim() <= 0)
 					{

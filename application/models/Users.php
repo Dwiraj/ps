@@ -44,7 +44,7 @@
 			*
 			* this function is for show user(Admin) list to admin only
 			*/
-			public function get_data()
+			public function get_admins()
 			{
 				$this -> db -> select('*');
 				$this -> db -> from('users');
@@ -137,11 +137,11 @@
 			{
 				$day = date("d");
 				$month = date("m");
-				$this -> db -> select('employee_id, first_name, last_name, dob');
-	 			$this -> db -> from('employees');
-	 			$this -> db -> join('users', 'employees.employee_id = users.id');
-	 			$this -> db -> where('DAY(dob)', $day);
-	 			$this -> db -> where('MONTH(dob)', $month);
+				$this -> db -> select('e.employee_id, first_name, last_name, e.dob');
+	 			$this -> db -> from('employees as e');
+	 			$this -> db -> join('users', 'e.employee_id = users.id');
+	 			$this -> db -> where('DAY(e.dob)', $day);
+	 			$this -> db -> where('MONTH(e.dob)', $month);
 	 			$this -> db -> order_by('first_name', 'asc');
 	 			$query = $this -> db -> get();
 	 			if($query -> num_rows() <= 0)
@@ -165,11 +165,11 @@
 			{
 				$day = date("d");
 				$month = date("m");
-				$this -> db -> select('employee_id, first_name, last_name, dob');
-	 			$this -> db -> from('employees');
-	 			$this -> db -> join('users', 'employees.employee_id = users.id');
-	 			$this -> db -> where('MONTH(dob)', $month);
-	 			$this -> db -> where('DAY(dob)>=', $day);
+				$this -> db -> select('e.employee_id, first_name, last_name, e.dob');
+	 			$this -> db -> from('employees as e');
+	 			$this -> db -> join('users', 'e.employee_id = users.id');
+	 			$this -> db -> where('MONTH(e.dob)', $month);
+	 			$this -> db -> where('DAY(e.dob)>=', $day);
 	 			$this -> db -> order_by('first_name', 'asc');
 	 			$query = $this -> db -> get();
 	 			if($query -> num_rows() <= 0)
@@ -244,13 +244,38 @@
 			{
 				$id = $this -> session -> userdata['logged_in']['id'];
 				$this -> db -> set('password', $password);
-				$this	-> db -> where('id', $id);
-				$this	-> db -> update('users');
+				$this -> db -> where('id', $id);
+				$this -> db -> update('users');
 			}
 
 		/***********************************************************************/
 			var $table = 'users';
-			var $column = array('first_name','last_name','email','password','user_level', 'last_login', 'user_status');
+			var $column = array(
+								'first_name',
+								'last_name',
+								'email',
+								'password',
+								'salutation',
+								'father_name',
+								'mother_name',
+								'qualification',
+								'comment',
+								'salary',
+								'position',
+								'start_date',
+								'current_status',
+								'end_date',
+								'dob',
+								'address',
+								'phone_no',
+								'alternate_no',
+								'pan_no',
+								'bank_account_no',
+								'profile_picture',
+								'user_level',
+								'last_login',
+								'user_status'
+								);
 			var $order = array('id' => 'desc');
 
 			public function __construct()
@@ -258,9 +283,10 @@
 				parent::__construct();
 			}
 
-			private function _get_datatables_query()
+			private function _get_datatables_query($level = 2)
 			{
 				$this->db->from($this->table);
+				$this->db->where('user_level', $level);
 				$i = 0;
 				foreach ($this->column as $item)
 				{
@@ -281,25 +307,26 @@
 				}
 			}
 
-			function get_datatables()
+			function get_datatables($level = 2)
 			{
-				$this->_get_datatables_query();
+				$this->_get_datatables_query($level);
 				if($_POST['length'] != -1)
 					$this->db->limit($_POST['length'], $_POST['start']);
 				$query = $this->db->get();
 				return $query->result();
 			}
 
-			function count_filtered()
+			function count_filtered($level = 2)
 			{
-				$this->_get_datatables_query();
+				$this->_get_datatables_query($level);
 				$query = $this->db->get();
 				return $query->num_rows();
 			}
 
-			public function count_all()
+			public function count_all($level = 2)
 			{
 				$this->db->from($this->table);
+				$this->db->where('user_level', $level);
 				return $this->db->count_all_results();
 			}
 

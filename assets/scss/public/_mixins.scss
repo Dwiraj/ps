@@ -1,0 +1,146 @@
+/**
+*
+* mixins.scss
+*
+* Contains different type of functions
+*
+* Project: Base
+* Author: Chintan Kotadia <chintankotadia13@gmail.com>
+* Company: IshOnCourse
+*/
+
+/**
+ * Following mixin handles responsive media screen from mobile first to desktop
+ */
+
+@mixin responsive($media, $custom-width: '') {
+	@if $media == small {
+		@media only screen and (min-width: $small-screen) {
+			@content;
+		}
+	}
+	@else if $media == tablet {
+		@media only screen and (min-width: $tablet-screen) {
+			@content;
+		}
+	}
+	@else if $media == desktop {
+		@media only screen and (min-width: $desktop-screen) {
+			@content;
+		}
+	}
+	@else if $media == custom {
+		@media only screen and (min-width: $custom-width) {
+			@content;
+		}
+	}
+}
+
+/**
+ * Following mixin handles content blocks (Blocks size: 1, 2, ..., 5)
+ */
+
+@mixin blocks($clsss, $display, $media) {
+	#{$clsss} {
+		display: table;
+		>li {
+			width: 100%;
+			display: block;
+		}
+		@include block(#{$clsss}-5, 20%,    $display, $media);
+		@include block(#{$clsss}-4, 25%,    $display, $media);
+		@include block(#{$clsss}-3, 33.33%, $display, $media);
+		@include block(#{$clsss}-2, 50%,    $display, $media);
+		@include block(#{$clsss}-1, 100%,   $display, $media);
+	}
+}
+
+/**
+ * Following mixin handles content single block
+ */
+
+@mixin block($clsss, $width, $display, $media) {
+	#{$clsss} {
+		>li {
+			@include responsive($media) {
+				width: $width;
+				@if $display == "left" {
+					float: left;
+				}
+				@else if $display == "right" {
+					float: right;
+				} @else {
+					display: $display;
+				}
+			}
+		}
+	}
+}
+
+/**
+ * Following mixin handles background image sizes includes all browser specific size like: webkit, moz, o
+ */
+
+@mixin background-size($size) {
+	@include prefixer(background-size, $size, webkit moz o spec);
+}
+
+@mixin opacity($value) {
+	$ie: $value*100;
+	/* This works in IE 8 & 9 */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=#{$ie}); // IE 5-7
+
+	/* Modern Browsers */
+	opacity: $value;
+}
+
+/**
+ * Following mixin handles all header tags like h1, h2, h3, h4, h5, h6
+ */
+
+@mixin header-tag($fontSize, $lineHeight, $fontWeight, $linkColor, $linkHoverColor) {
+	font-size: $fontSize;
+	line-height: $lineHeight;
+	font-weight: $fontWeight;
+
+	&, a {
+		color: $linkColor;
+	}
+	a:hover {
+		text-decoration: none;
+		color: $linkHoverColor;
+	}
+}
+
+@mixin arrow($arrow, $width, $color, $position: absolute) {
+	content: "";
+	position: $position;
+	@if $arrow == 'top' or $arrow == 'bottom' {
+		border-right: $width solid transparent;
+		border-#{$arrow}: $width solid $color;
+		border-left: $width solid transparent;
+	} @else if $arrow == 'left' or $arrow == 'right' {
+		border-top: $width solid transparent;
+		border-#{$arrow}: $width solid $color;
+		border-bottom: $width solid transparent;
+	} @else {
+		border-style: solid;
+		border-width: $width;
+		border-color: $color;
+	}
+}
+
+@mixin responsive-image() {
+	position: absolute;
+	overflow: hidden;
+	img {
+		position: relative;
+		left: 50%;
+		@include transform(translateX(-50%));
+		width: auto;
+		max-width: none;
+		min-width: 100%;
+		height: auto;
+	}
+}

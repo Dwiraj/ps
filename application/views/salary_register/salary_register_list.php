@@ -1,11 +1,11 @@
 
 <h2 align="center">Salary register list</h2>
 <div align="center">
-	<a href="<?php echo base_url()?>create-new-salary-register">
+	<a href="<?php echo base_url()?>new-salary-register">
 		<button class="button-btn">Create new</button>
 	</a>
 </div>
-<table class="table" >
+<table class="table">
 	<thead>
 		<tr>
 			<th>No</th>
@@ -14,7 +14,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php 
+		<?php
 		$n=0;
 		if(empty($query))
 		{
@@ -28,7 +28,7 @@
 		{
 			foreach ($query as $key)
 			{
-				switch ($key['month']) 
+				switch ($key['month'])
 				{
 				case '1':
 					$mon = "January";
@@ -79,9 +79,9 @@
 					<button onclick="delete_list('<?php echo $key['month'];?>', '<?php echo $key['year']; ?>');" class="mybutton-delete">Delete</button>
 				</td>
 			</tr>
-			<?php 
+			<?php
 			}
-		} 
+		}
 		?>
 	</tbody>
 </table>
